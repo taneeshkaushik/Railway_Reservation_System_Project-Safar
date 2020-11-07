@@ -38,30 +38,38 @@
       }else   
          {
     ?>
+    
 
-    <div class="container" style="margin-top : 150px;  " > 
-    <div class="jumbotron" style="width:50%; background:	#C0C0C0; opacity:75%" >
+    <div class="container-fluid"> 
+    <br>
+ <h2 class="text-center">
+ Welcome to Railway Registration System
+</h2>
+<br>
+    <div class="jumbotron" style="width:100%;#C0C0C0; opacity:75%;" >
     <div>    
     <h2 class="text-center text-dark">Login</h2><br>
     </div>
       <form action="" class="needs-validation" method ="post" novalidate>
         <div class="form-group">
-          <label for="uname">UserId:</label>
+          <label for="uname "><h5> UserId: </h5></label>
           <input type="text" class="form-control" id="uname" placeholder="Enter username" name="userid" required>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group">
-          <label for="pwd">Password:</label>
+          <label for="pwd"><h5>Password:</h5></label>
           <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        Don't have a Account. <a style="margin-left: auto;" href="register.php">Click here to Register </a>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <h5> Don't have a Account. <a class="btn btn-outline btn-dark" style="margin-left: auto; " href="register.php">Click here to Register </a></h5>
 
       </form>
       
+      </div>
+      </div>
     
 <script>
   // Disable form submissions if there are invalid fields
@@ -86,5 +94,6 @@
 
     <?php } ?>
   
+
   </body>
 </html>
