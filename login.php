@@ -19,7 +19,7 @@
         
         // echo $userid . $password;
 
-        $query = "SELECT * FROM `user_registration` where user_id ='$userid' and Password ='".md5($password)."'";
+        $query = "SELECT * FROM `booker` where username ='$userid' and password ='".md5($password)."'";
         $result = mysqli_query($con,$query) or die(mysql_error());
         $r = mysqli_fetch_assoc($result);
 

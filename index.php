@@ -70,21 +70,23 @@ include("auth.php");
       <div class="modal-body">
       <!-- Form starts here -->
         <form>
-          <div class="form-group">
-            <label  class="col-form-label"> Name:</label>
-            <input type="text" class="form-control" id="name1" required="true">
+          <div id="booking-form" class="form-group">
+            <label  class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="name0" required="true">
             <label for="recipient-name" class="col-form-label"> Age:</label>
-            <input type="text" class="form-control" id="age1" required="true">
+            <input type="text" class="form-control" id="age0" required="true">
             <label for="" class="col-form-label">Gender:</label>
+            <div class="form-group-inline">
             <select class="browser-default custom-select ">
                 <option selected>None</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
                 <option value="3">Other</option>
-            </select>          
+            </select> 
+            </div>       
           </div >
           <div class="form-group" >
-          <a>+Add Passenger</a>
+          <a onclick="addPassengers()">+Add Passenger</a>
           </div>
           
           <div class="form-group">
@@ -95,26 +97,13 @@ include("auth.php");
             <label for="journey_date" class="col-form-label"> Journey Date:</label>
             <input type="date" class="form-control" id="journey_date" required="true">
           </div>
-
+          
           <label for="" class="col-form-label">Choose Coach Type :</label>
             <select class="browser-default custom-select ">
                 <option selected>AC</option>
                 <option value="1">SL</option>
             </select> 
  
-          <!-- <div class="form-group">
-            <label for="card" class="col-form-label">Card Details :</label>
-            <input type="text" class="form-control" id="card-number" required="true">
-          </div>
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Card:</label>
-            <input type="text" class="form-control" id="recipient-name" required="true">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name" required="true">
-          </div> -->
 
  
         </form>
@@ -122,11 +111,44 @@ include("auth.php");
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary">Book Ticket</button>
+        <button type="submit" class="btn btn-primary">Book Ticket</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<script type='text/javascript'>
+        var c = 0;
+        function addPassengers(){
+          c++;
+        a =  '<label  class="col-form-label">Name'+ c.toString() +':</label>'
+        b =   '<input type="text" class="form-control" id="name'+ c.toString() +'" required="true">'
+        c1 =    '<label for="recipient-name" class="col-form-label"> Age'+c.toString()+':</label>'
+        d =  '<input type="text" class="form-control" id="age'+ c.toString() +'" required="true">'
+        e =   '<label for="" class="col-form-label">Gender'+c.toString()+':</label>'
+        // f =  '<input type="text" class="form-control" id="age'+ c.toString() +'" required="true">'
+
+
+        m = '<div>'
+        f =   '<select class="browser-default custom-select " >'
+        g =     ' <option selected>None</option>'
+        h =     ' <option value="1">Male</option>'
+        i =    ' <option value="2">Female</option>'
+        j=    '<option value="3">Other</option>'
+        k =   '</select> '
+        l = '</div>' 
+
+        document.getElementById("booking-form").innerHTML += a+b+c1+d+e+ m+ f + g+ h+i+j+k+l;
+
+        }
+
+        function aftersubmit(){
+          c = 0;
+        }
+
+</script>
+
 
 
 </body>

@@ -40,17 +40,20 @@ include("auth.php");
 <h2 >ADMIN PORTAL</h2>
 <hr>
 
-<div class="btn-group-vertical">
-  <button type="button" class="btn btn-lg btn-primary">ADD TRAIN</button>
+<div class="btn-group-vertical" style="width:400px">
+  <button type="button" class="btn btn-lg btn-primary" >ADD TRAIN</button>
+  <br>
   <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button>
-  
+  <br>
 
-  <button type="button" class="btn btn-lg btn-primary">ADD TRAIN</button>
-  <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button>
+  <button type="button" class="btn btn-lg btn-primary">ADD STATION</button>
+  <br>
+
+  <button type="button" class="btn btn-lg btn-primary">REMOVE STATION</button>
   
-  <button type="button" class="btn btn-lg btn-primary">ADD TRAIN</button>
-  <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button>
-  
+  <!-- <button type="button" class="btn btn-lg btn-primary">ADD TRAIN</button>
+  <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button> 
+   -->
 </div>
 
 

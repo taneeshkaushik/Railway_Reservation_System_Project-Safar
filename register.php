@@ -34,6 +34,9 @@ if (isset($_REQUEST['userid'])){
  $password = mysqli_real_escape_string($con,$password);
 
 
+ $creditcard = stripslashes($_REQUEST['creditcard']);
+ $creditcard = mysqli_real_escape_string($con,$creditcard);
+
 
  $password1 = stripslashes($_REQUEST['password1']);
  $password1 = mysqli_real_escape_string($con,$password1);
@@ -43,7 +46,7 @@ if (isset($_REQUEST['userid'])){
 if($password == $password1)
 {
 
-$query = "INSERT INTO `user_registration` (`user_id`, `Name`, `Password`, `email`, `address`, `phoneNo`) VALUES ('$userid', '$name', '".md5($password)."', '$email', '$address', '$phone');";
+$query = "INSERT INTO `booker` (`username`, `Name`, `credit_card_num`, `address`, `email`, `mobile`,`password`) VALUES ('$userid', '$name','$creditcard','$address' , '$email', '$phone' , '".md5($password)."' );";
         $result = mysqli_query($con,$query);
         
         if($result){
@@ -100,7 +103,13 @@ echo '<script>alert("Passwords do not match."); history.go(-1);</script>';
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
-
+        
+        <div class="form-group">
+          <label >Your Credit Card Number:</label>
+          <input type="text" class="form-control"  placeholder="Enter your credit card number" name="creditcard" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
     
         <div class="form-group">
           <label>Password:</label>
