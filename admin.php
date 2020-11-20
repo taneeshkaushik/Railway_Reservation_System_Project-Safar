@@ -1,22 +1,66 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
-include("header.php");
 ?>
 
 
-    <p>Welcome <?php echo $_SESSION['userid']; ?>!</p>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Registration</title>
 
-    <a href="logout.php">Logout</a>
 
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" >Welcome to the Admin Portal</a>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="well text-center">
+
+<h2 >ADMIN PORTAL</h2>
+<hr>
+
+<div class="btn-group-vertical" style="width:400px">
+  <button type="button" class="btn btn-lg btn-primary" >ADD TRAIN</button>
+  <br>
+  <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button>
+  <br>
+
+  <button type="button" class="btn btn-lg btn-primary">ADD STATION</button>
+  <br>
+
+  <button type="button" class="btn btn-lg btn-primary">REMOVE STATION</button>
+  
+  <!-- <button type="button" class="btn btn-lg btn-primary">ADD TRAIN</button>
+  <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button> 
+   -->
+</div>
+
+
+</div>
+
+
+</div>
 
 
     </body>
