@@ -11,25 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
-<body style="background-color:grey; max-width:100% max-height:100% ;  /* Center and scale the image nicely */
+<body style="background-color:white; max-width:100% max-height:100% ;  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;">
-
-<!-- <body> -->
-<!-- <nav class="navbar navbar-expand-sm bg-light">
-
-   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="home.php">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="">Link 3</a>
-    </li>
-
-  </ul>
-
-</nav> -->
