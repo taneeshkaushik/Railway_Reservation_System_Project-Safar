@@ -1,11 +1,10 @@
-
     <?php
       require('header.php');
       require('db.php');
       session_start();
-      if(isset($_POST['userid'])){
+      if(isset($_POST['userid']))
+      {
         $userid = stripslashes($_REQUEST['userid']);
-      
         //escapes special characters in a string
         $userid = mysqli_real_escape_string($con,$userid);
         $password = stripslashes($_REQUEST['password']);
@@ -16,7 +15,7 @@
           $_SESSION['userid'] = 'admin';
           header("Location:admin.php");
         }
-        
+
         // echo $userid . $password;
 
         $query = "SELECT * FROM `booker` where username ='$userid' and password ='".md5($password)."'";
@@ -93,7 +92,6 @@
   </script>
 
     <?php } ?>
-  
 
   </body>
 </html>

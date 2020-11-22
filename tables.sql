@@ -67,7 +67,6 @@ create table (booker_name_)tic_pas
 
 );
 
-
 create table trains_running
 (
     train_id int not null,
