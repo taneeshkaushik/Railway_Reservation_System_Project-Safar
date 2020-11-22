@@ -1,10 +1,10 @@
 CREATE TABLE admin
-(username    VARCHAR(25) NOT NULL, 
- password    VARCHAR(25) NOT NULL, 
- name        TEXT(25) NOT NULL, 
- designation VARCHAR(25) NOT NULL, 
- email       VARCHAR(25) NOT NULL, 
- mobile      VARCHAR(10) NOT NULL,
+(username    VARCHAR(255) NOT NULL, 
+ password    VARCHAR(255) NOT NULL, 
+ name        TEXT(255) NOT NULL, 
+ designation VARCHAR(255) NOT NULL, 
+ email       VARCHAR(255) NOT NULL, 
+ mobile      VARCHAR(15) NOT NULL,
  PRIMARY KEY(username)
 );
 
@@ -29,11 +29,11 @@ create table trains
 this table is for booker
 create table booker
 (
- username    VARCHAR(25) NOT NULL, 
- password    VARCHAR(25) NOT NULL, 
- name        varchar(25) NOT NULL, 
+ username    VARCHAR(255) NOT NULL, 
+ password    VARCHAR(255) NOT NULL, 
+ name        varchar(255) NOT NULL, 
  address VARCHAR(50) NOT NULL, 
- email       VARCHAR(25) NOT NULL, 
+ email       VARCHAR(255) NOT NULL, 
  mobile      VARCHAR(15) NOT NULL,
  PRIMARY KEY(username)
 )
@@ -46,7 +46,7 @@ create table (booker_name)_ticket_table
     train_id int,
     ticket_date date,
     primary key(pnr)
-)
+);
 
 create table (booker_name)_passengers
 (
@@ -76,4 +76,4 @@ create table trains_running
     num_ac int, 
     primary key(train_id, journey_date),
     FOREIGN key(train_id) references trains(train_id)
-)
+);

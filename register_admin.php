@@ -3,9 +3,13 @@
 require('db.php');
 require('header.php');
 
-if (isset($_REQUEST['userid'])){
+if (isset($_REQUEST['token'])){
 
- $userid = stripslashes($_REQUEST['userid']);
+ 
+  $token = stripslashes($_REQUEST['token']);
+  $token= mysqli_real_escape_string($con,$token); 
+
+ $userid = stripslashes($_REQUEST['username']);
  $userid = mysqli_real_escape_string($con,$userid); 
  $name = stripslashes($_REQUEST['name']);
  $name = mysqli_real_escape_string($con,$name); 
@@ -16,14 +20,10 @@ if (isset($_REQUEST['userid'])){
  $phone = stripslashes($_REQUEST['phone']);
  $phone = mysqli_real_escape_string($con,$phone);
 
- $address = stripslashes($_REQUEST['address']);
- $address = mysqli_real_escape_string($con,$address);
+ $designation = stripslashes($_REQUEST['designation']);
+ $designation = mysqli_real_escape_string($con,$designation);
  $password = stripslashes($_REQUEST['password']);
  $password = mysqli_real_escape_string($con,$password);
-
-
-//  $creditcard = stripslashes($_REQUEST['creditcard']);
-//  $creditcard = mysqli_real_escape_string($con,$creditcard);
 
 
  $password1 = stripslashes($_REQUEST['password1']);
@@ -31,56 +31,35 @@ if (isset($_REQUEST['userid'])){
 
 //  echo $userid . $name .$email.$phone.$address.$password;
 
-if($password == $password1)
+if($password == $password1 and $token == 'special')
 {
 
-$query = "INSERT INTO `booker` (`username`, `Name`,`address`, `email`, `mobile`,`password`) VALUES ('$userid', '$name','$address' , '$email', '$phone' , '".md5($password)."' );";
+$query = "INSERT INTO `admin` (`username`, `name`, `designation`, `email`, `mobile`,`password`) VALUES ('$userid', '$name','$designation' , '$email', '$phone' , '".md5($password)."' );";
         $result = mysqli_query($con,$query);
         
         if($result){
-         $q1 = "CREATE table ".$userid."_ticket_table
-         (
-             pnr int, 
-             train_id int,
-             ticket_date date,
-             primary key(pnr)
-         );";
-
-         $q2 = "CREATE table ".$userid."_passengers
-          (
-              id INT AUTO_INCREMENT,
-              name text,
-              age int,
-              sex TINYINT,
-              PRIMARY key(id)
-          );";
-
-         $q3 = "CREATE table ".$userid."tic_pas
-         (
-             pnr int not null,
-             passenger_id int not null,
-             primary key(pnr, passenger_id),
-             foreign key(pnr) REFERENCES ".$userid."_ticket_table(pnr), 
-             foreign key (passenger_id) REFERENCES ".$userid."_passengers(id)
-         
-         );";
-         $res1 = mysqli_query($con,$q1);
-         $res2 = mysqli_query($con,$q2);
-         $res3 = mysqli_query($con,$q3);
-
-         if($res1 and $res2 and $res3) {
-
+          $query1  = "CREATE TABLE ".$userid."_trains_added (train_id   INT NOT NULL, 
+           date_added DATE NOT NULL, 
+           num_sl     INT, 
+           num_ac     INT,
+           primary KEY(train_id,date_added)
+          );
+          " ;
+          //echo $query1;
+          $res = mysqli_query($con,$query1);
+          if($res){
 
             echo "<div class='form'>
 <h3>You are registered successfully.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>"; } else { echo "some erroe in table registration"  ;}
+<br/>Click here to <a href='login.php'>Login</a></div>"; } else { echo "There is some error.";}
+          
         }
 
     }
   
   else{
 // Display the alert box  
-echo '<script>alert("Passwords do not match."); history.go(-1);</script>'; 
+echo '<script>alert("Passwords do not match or incorrect token."); history.go(-1);</script>'; 
   }
 }
     else{
@@ -89,13 +68,20 @@ echo '<script>alert("Passwords do not match."); history.go(-1);</script>';
 <div class="container" style="margin-top:20px;" > 
     <div class="jumbotron"  style=" background:	#C0C0C0; opacity:75%" >
     <div>    
-    <h2 class="text-center">User Registration Form</h2><br>
+    <h2 class="text-center">Admin Registration Form</h2><br>
     </div>
       <form action="" class="needs-validation" method ="post" novalidate>
         
+      <div class="form-group">
+          <label >Enter Unique Token:</label>
+          <input type="password" class="form-control"  placeholder="Enter unique token" name="token" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
         <div class="form-group">
           <label >UserId:</label>
-          <input type="text" class="form-control"  placeholder="Enter Userid" name="userid" required>
+          <input type="text" class="form-control"  placeholder="Enter Username" name="username" required>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
@@ -119,19 +105,12 @@ echo '<script>alert("Passwords do not match."); history.go(-1);</script>';
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>        
         <div class="form-group">
-          <label >Address:</label>
-          <input type="text" class="form-control"  placeholder="Enter your address" name="address" required>
+          <label >Designation:</label>
+          <input type="text" class="form-control"  placeholder="Designation" name="designation" required>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
-        
-        <!-- <div class="form-group">
-          <label >Your Credit Card Number:</label>
-          <input type="text" class="form-control"  placeholder="Enter your credit card number" name="creditcard" required>
-          <div class="valid-feedback">Valid.</div>
-          <div class="invalid-feedback">Please fill out this field.</div>
-        </div> -->
-    
+            
         <div class="form-group">
           <label>Password:</label>
           <input type="password" class="form-control"  placeholder="Enter password" name="password" required>
@@ -147,8 +126,8 @@ echo '<script>alert("Passwords do not match."); history.go(-1);</script>';
         </div>
 
         <button type="submit" class="btn btn-primary">Register</button>
-        <a href ="register_admin.php" >Register as Admin</a>
- 
+      
+
       </form>
       
     
@@ -176,7 +155,6 @@ echo '<script>alert("Passwords do not match."); history.go(-1);</script>';
 
 
 <?php } ?>
-
 
 
 
