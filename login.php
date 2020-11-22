@@ -2,16 +2,9 @@
       require('header.php');
       require('db.php');
       session_start();
-<<<<<<< HEAD
-      if(isset($_POST['userid']))
-      {
-        $userid = stripslashes($_REQUEST['userid']);
-        //escapes special characters in a string
-=======
       if(isset($_POST['userid'])){
         $fname  = $_REQUEST['login_type'];
         $userid = stripslashes($_REQUEST['userid']);
->>>>>>> 872a6b27ffd6c655ea8421bba3c6d1daef8bf92a
         $userid = mysqli_real_escape_string($con,$userid);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con,$password);
@@ -22,14 +15,9 @@
         {
           $table = "admin";
         }
-<<<<<<< HEAD
-
-        // echo $userid . $password;
-=======
         
         $query = "SELECT * FROM `".$table."` where username ='$userid' and password ='".md5($password)."'";
         echo $query;
->>>>>>> 872a6b27ffd6c655ea8421bba3c6d1daef8bf92a
 
         
         $result = mysqli_query($con,$query) or die(mysql_error());
