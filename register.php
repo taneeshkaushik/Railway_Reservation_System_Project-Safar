@@ -55,7 +55,7 @@ $query = "INSERT INTO `booker` (`username`, `Name`,`address`, `email`, `mobile`,
               PRIMARY key(id)
           );";
 
-         $q3 = "CREATE table ".$userid."tic_pas
+         $q3 = "CREATE table ".$userid."_tic_pas
          (
              pnr int not null,
              passenger_id int not null,

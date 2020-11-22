@@ -42,12 +42,22 @@ $query = "INSERT INTO `admin` (`username`, `name`, `designation`, `email`, `mobi
            date_added DATE NOT NULL, 
            num_sl     INT, 
            num_ac     INT,
-           primary KEY(train_id,date_added)
+           primary KEY(train_id,date_added),
+           foreign key(train_id) references trains(train_id)
+          );
+          " ;
+          
+
+          $query2  = "CREATE TABLE ".$userid."_trains (train_id   INT NOT NULL, 
+          primary key (train_id),
+          foreign key(train_id) references trains(train_id)
+           
           );
           " ;
           //echo $query1;
-          $res = mysqli_query($con,$query1);
-          if($res){
+          $res1 = mysqli_query($con,$query1);
+          $res2= mysqli_query($con,$query2);
+          if($res1 and $res2){
 
             echo "<div class='form'>
 <h3>You are registered successfully.</h3>
