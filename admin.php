@@ -1,6 +1,8 @@
 <?php
 //include auth.php file on all secure pages
+require('db.php');
 include("auth.php");
+
 ?>
 
 
@@ -23,7 +25,12 @@ include("auth.php");
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" >Welcome to the Admin Portal</a>
+    <ul class="nav navbar-nav">    
+    <li><a href="history.php"> History </a></li>
+    <li><a data-toggle="modal" data-target="#exampleModal"> Add Train </a></li>
+  
+      <!-- <a class="navbar-brand" >Welcome to the Admin Portal</a> -->
+    </ul>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
@@ -33,18 +40,89 @@ include("auth.php");
   </div>
 </nav>
 
+
+
 <div class="container">
 
   <div class="well text-center">
 
-  <h2 >ADMIN PORTAL</h2>
-  <hr>
+  <h2 >ADMIN PORTAL</h2> <br>  <h4> List of Available Trains </h4>
+    <div class="btn-group-vertical" style="width:100%">
+  
+    
+    <?php
+      
 
-    <div class="btn-group-vertical" style="width:400px">
-      <button type="button" class="btn btn-lg btn-primary" >ADD TRAIN</button>
-      <br>
-      <button type="button" class="btn btn-lg btn-primary">REMOVE TRAIN</button>
-      <br>
+       $query = "SELECT train_id FROM trains";
+       $result = mysqli_query($con,$query) or die(mysql_error());
+       
+       if(mysqli_num_rows($result) >0) {
+        ?>
+
+        <table class="table ">
+        <tr>
+          <th> Train Number  </th>
+          <th> Journey Date  </th>
+          <th> Add Sleeper Coach </th>
+          <th> Add AC Coach </th>
+          <th> Action </th>     
+        </tr>
+
+       <?php
+
+        while($row = mysqli_fetch_assoc($result)){      
+          ?>
+        <tr>
+        <form action="" , method="POST">
+         <td>
+           <?php echo $row["train_id"];
+           
+           ?>
+           <input type="hidden" required="True" name ="train_no" value = <?php echo $row["train_id"]; ?> >  </input>
+         </td>
+         <td><input type="date" required="True" name ="journey_date">  </input> </td>
+         <td><input  type="number" value="0" required="True" name ="num_sl"> </input> </td>
+         <td><input type="number" value="0" required="True" name ="num_ac"> </input> </td>
+         <td><button type="submit" > Add </button>   </td>
+        </form>
+        </tr>
+         <?php
+
+if (isset($_REQUEST['journey_date'])){
+
+  $train_id = $_REQUEST['train_no'];
+
+  $journey_date = $_REQUEST['journey_date'];
+  $num_ac = $_REQUEST['num_ac'];
+
+  $num_sl = $_REQUEST['num_sl'];
+
+  // echo $train_id . $journey_date .$num_ac .$num_sl;
+  $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`) values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
+  $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
+  $result = mysqli_query($con,$query2);
+  $result1 = mysqli_query($con,$query1);
+  if($result1 and $result){
+  //echo "train added successfully for date".$journey_date;
+  header("Location: admin.php");
+
+  }
+}
+        
+      }
+
+        ?>
+        </table>
+        <?php
+
+       }
+       else{
+         ?>
+       <h4> No train available </h4>
+        <?php
+       }
+
+    ?>
     
     </div>
 
@@ -54,38 +132,23 @@ include("auth.php");
 
 </div>
 
-
-<div class="modal fade" id="bookTicket" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <!-- Form starts here -->
-        <form>
-          <div id="add-train" class="form-group">
-            <label  class="col-form-label">Name:</label>
-            <input type="text" class="form-control" id="name0" required="true">
-      
-          </div >
-        
-          <div class="form-group">
-            <label for="journey_date" class="col-form-label"> Journey Date:</label>
-            <input type="date" class="form-control" id="journey_date" required="true">
-          </div>
-
- 
+          <form action="addtrain.php" method="post">
+           Enter High Security Key <input type="password" name="key"><br>
+        <hr>
+        <input type="submit">
         </form>
+      </div>
 
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <button type="submit" class="btn btn-primary">Book Ticket</button>
-      </div>
     </div>
   </div>
 </div>
