@@ -1,4 +1,3 @@
-
     <?php
       require('header.php');
       require('db.php');
@@ -107,7 +106,6 @@
   </script>
 
     <?php } ?>
-  
 
   </body>
 </html>

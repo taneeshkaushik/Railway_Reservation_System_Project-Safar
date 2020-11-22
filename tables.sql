@@ -16,7 +16,17 @@ CREATE TABLE admin_name_trains_added
  num_sl     INT, 
  num_ac     INT,
  primary KEY(train_id,date_added)
+ foreign key(train_id) references trains(train_id)
 );
+
+create table admin_trains
+(
+    train_id INT NOT NULL, 
+    primary key (train_id)
+    foreign key(train_id) references trains(train_id)
+
+);
+
 
 table for trains. 
 
@@ -25,6 +35,9 @@ create table trains
      train_id int  not null AUTO_INCREMENT,
      primary key(train_id)
 );
+
+
+
 
 this table is for booker
 create table booker
@@ -45,7 +58,8 @@ create table (booker_name)_ticket_table
     pnr int, 
     train_id int,
     ticket_date date,
-    primary key(pnr)
+    primary key(pnr),
+    foreign key(train_id) references trains(train_id)
 );
 
 create table (booker_name)_passengers
@@ -57,7 +71,7 @@ create table (booker_name)_passengers
     PRIMARY key(id)
 );
 
-create table (booker_name_)tic_pas
+create table (booker_name_)_tic_pas
 (
     pnr int not null,
     passenger_id int not null,
@@ -66,7 +80,6 @@ create table (booker_name_)tic_pas
     foreign key (passenger_id) REFERENCES (booker_name)_passengers(id)
 
 );
-
 
 create table trains_running
 (
