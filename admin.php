@@ -104,13 +104,13 @@ if (isset($_REQUEST['journey_date'])){
    values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
   $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
   values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
-  $creating_ticket_table_for_each_train= "CREATE TABLE `".$train_id."`_'".$journey_date."'_booked
+  $creating_ticket_table_for_each_train= "CREATE TABLE `".$train_id."_".$journey_date."_booked`
   (
     coach_num varchar(6) not null, 
     seat_num int not null,
     booker_username varchar(255) not null, 
     FOREIGN key(booker_username) references booker(username)
-  )";
+  );";
 
   
   $result1 = mysqli_query($con,$query2);
