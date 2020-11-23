@@ -18,54 +18,6 @@ include("auth.php");
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php
-require('db.php');
-//session_start();
-if(isset($_POST['train_no'])){
-
-
-
- $name = $_REQUEST['name'];
-//  $name = mysqli_real_escape_string($con,$name); 
-
- $age = $_REQUEST['age'];
-//  $age = mysqli_real_escape_string($con,$age); 
-
- $train_no = stripslashes($_REQUEST['train_no']);
- $train_no = mysqli_real_escape_string($con,$train_no);
-
- $date = stripslashes($_REQUEST['journey_date']);
- $date = mysqli_real_escape_string($con,$date);
-
- $gender = $_REQUEST['gender'];
-
- $coachType = $_REQUEST['coach_type'];
-
-//  foreach ($name as $v){
-//   echo $v;
-
-//  }
-//  foreach ($age as $v){
-//         echo $v;
-      
-//        } 
-// foreach ($gender as $v){
-//         echo $v;      
-//        }
-//  echo $train_no . $date . $coachType ;
-
-
-// Writing of database part will be done here
- 
- 
-
-
-
-}
-else{
-
-
-?>
 
 
 <nav class="navbar navbar-inverse">
@@ -92,10 +44,75 @@ else{
  </h2>
 </header>
 
+
+
+<?php
+require('db.php');
+//session_start();
+if(isset($_POST['train_no'])){
+
+
+
+//  $name = $_REQUEST['name'];
+// //  $name = mysqli_real_escape_string($con,$name); 
+
+//  $age = $_REQUEST['age'];
+//  $age = mysqli_real_escape_string($con,$age); 
+
+ $train_no = stripslashes($_REQUEST['train_no']);
+ $train_no = mysqli_real_escape_string($con,$train_no);
+
+ $date = stripslashes($_REQUEST['journey_date']);
+ $date = mysqli_real_escape_string($con,$date);
+ $_SESSION["train_id"] = $train_no;
+ $_SESSION["date"] = $date;
+
+//  $gender = $_REQUEST['gender'];
+
+//  $coachType = $_REQUEST['coach_type'];
+
+//  foreach ($name as $v){
+//   echo $v;
+
+//  }
+//  foreach ($age as $v){
+//         echo $v;
+      
+//        } 
+// foreach ($gender as $v){
+//         echo $v;      
+//        }
+//  echo $train_no . $date . $coachType ;
+
+
+// Writing of database part will be done here
+ 
+//  echo $train_no . $date;
+
+$query = "select * from `trains_running` where train_id = '$train_no' and journey_date = '$date';";
+$result = mysqli_query($con,$query) or die(mysql_error());
+if(mysqli_num_rows($result) >0){
+  $row =  mysqli_fetch_assoc($result);
+
+
+  $_SESSION["num_sl"] = $row["num_sl"];
+  $_SESSION["num_ac"] = $row["num_ac"];
+  header("Location:crousal.php");
+}
+else{
+  echo "Train not available";
+}
+
+}
+else{
+
+
+?>
+
 <div class="container well"> 
     <!-- form starts here -->
     <form method="post" >
-          <div id="booking-form" class="form-group">
+          <!-- <div id="booking-form" class="form-group">
             <label  class="col-form-label">Name:</label>
             <input type="text" class="form-control" name="name[]" required="true">
             <label for="recipient-name" class="col-form-label"> Age:</label>
@@ -112,7 +129,7 @@ else{
           </div >
           <div class="form-group" >
           <a onclick="addPassengers()">+Add Passenger</a>
-          </div>
+          </div> -->
           
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Train No:</label>
@@ -122,14 +139,14 @@ else{
             <label for="journey_date" class="col-form-label"> Journey Date:</label>
             <input type="date" class="form-control" name="journey_date" required="true">
           </div>
-          <div class="form-group-inline">
+          <!-- <div class="form-group-inline">
 
           <label for="" class="col-form-label">Choose Coach Type :</label>
             <select name = "coach_type" class="browser-default custom-select ">
                 <option value="AC" selected>AC</option>
                 <option value="SL">SL</option>
             </select> 
-          <div>
+          <div> -->
             <button type="submit" class="btn btn-success pull-right">Submit</button>
 
  
@@ -141,7 +158,7 @@ else{
 </div>
 
 
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
 
         var c = 0;
         function addPassengers(){
@@ -171,7 +188,7 @@ else{
           c = 0;
         }
 
-</script>
+</script> -->
 
 <?php } ?>
 
