@@ -6,6 +6,15 @@ include("auth.php");
 // echo $_SESSION["date"];
 // echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
 
+
+// if(isset($_REQUEST["submit"])){
+//    $seats = $_REQUEST['seats'];
+//    foreach ($seats as $v){
+//         echo $v;      
+//        }
+// }
+// else{
+
 ?>
 
 
@@ -22,7 +31,64 @@ include("auth.php");
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  
+  <style>
+   div label input {
+   margin-right:100px;
+}
+body {
+    font-family:sans-serif;
+}
+
+#ck-button {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+}
+
+#ck-button {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+}
+
+#ck-button:hover {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid green;
+    overflow:auto;
+    float:left;
+    color:green;
+}
+
+#ck-button label {
+    float:left;
+    width:4.0em;
+}
+
+#ck-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+#ck-button label input {
+    position:absolute;
+    top:-20px;
+}
+
+#ck-button input:checked + span {
+    background-color:#911;
+    color:#fff;
+}
+  </style>
+
 
 </head>
 <body>
@@ -52,8 +118,8 @@ include("auth.php");
  </h2>
 </header>
 
-
-
+<div>
+<form method="post">
 <div class="container well ">
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -65,41 +131,38 @@ include("auth.php");
     <div class="item active ">
     
     <div class="container">
-    <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 1 LB </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 4 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 9 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 12 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 17 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 20 LB</button></div>
+        <div class="row" style="margin-left: 360px;">
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
+        </div>
+        <div class="row" style="margin-left: 360px;">
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
+        </div>
+        <div class="row" style="margin-left: 360px;">
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 2 MB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 5 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 10 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 13 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 18 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 21 MB</button></div>
-
-        </div>
-        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 3 UB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 6 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 11 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 14 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 19 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 22 UB</button></div>
-
-        </div>
-        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 7 SL</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 8 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 15 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 16 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 23 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 24 SU</button></div>
-
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
         </div>
 
         <div class="row text-center ">
@@ -115,48 +178,43 @@ include("auth.php");
     <div class="item  ">
        <div class="container">
        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 1 LB </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 4 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 9 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 12 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 17 LB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 20 LB</button></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
+        </div>
+        <div class="row" style="margin-left: 360px;">
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
+        </div>
+        <div class="row" style="margin-left: 360px;">
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 2 MB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 5 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 10 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 13 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 18 MB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 21 MB</button></div>
-
-        </div>
-        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 3 UB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 6 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 11 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 14 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 19 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 22 UB</button></div>
-
-        </div>
-        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 7 SL</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 8 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 15 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 16 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 23 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 24 SU</button></div>
-
-        </div>
-
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
+           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
         </div>
         <div class="row text-center ">
           <h3>SL<?php echo $x+1;  ?></h3>
         </div>
     </div>
-
+    </div>
     
       <?php
     $x = $x+1 ;
@@ -191,32 +249,33 @@ include("auth.php");
     <div class="item active ">
     
     <div class="container">
-    <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 1 LB </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 2 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 7 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 8 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 13 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 14 LB </button></div>
+        <div class="row" style="margin-left: 360px;">
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 3 UB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 4 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 9 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 10 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 15 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 16 UB </button></div>
 
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
         </div>
-\
         <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 5 SU </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 6 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 11 SU </button></div>
-            <div class="col-md-1"><button class="btn-success"> 12 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 17 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 18 SL</button></div>
+   
+            
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
 
         </div>
        </div>
@@ -231,32 +290,33 @@ include("auth.php");
 
     <div class="item  ">
        <div class="container">
-        <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 1 LB </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 2 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 7 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 8 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 13 LB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 14 LB </button></div>
+       <div class="row" style="margin-left: 360px;">
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-            <div class="col-md-1"><button class="btn-success"> 3 UB</button> </div>
-            <div class="col-md-1"><button class="btn-success"> 4 UB</button></div>
-            <div class="col-md-1"><button class="btn-success"> 9 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 10 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 15 UB </button></div>
-            <div class="col-md-1"><button class="btn-success"> 16 UB </button></div>
 
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
         </div>
-
-        <div class="row" style="margin-left: 360px;" >
-            <div class="col-md-1"><button class="btn-success"> 5 SU </button> </div>
-            <div class="col-md-1"><button class="btn-success"> 6 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 11 SU </button></div>
-            <div class="col-md-1"><button class="btn-success"> 12 SL</button></div>
-            <div class="col-md-1"><button class="btn-success"> 17 SU</button></div>
-            <div class="col-md-1"><button class="btn-success"> 18 SL</button></div>
+        <div class="row" style="margin-left: 360px;">
+   
+            
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
+            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
 
         </div>
         </div>
@@ -286,3 +346,11 @@ include("auth.php");
 
   </div>
 </div>
+
+<button type="submit" class="btn btn-primary"> Book Tickets </button>
+
+</form>
+<div>
+
+</body>
+</html>
