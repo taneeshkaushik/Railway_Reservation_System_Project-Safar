@@ -101,3 +101,7 @@ create table 'train_id_date'_booked
     FOREIGN key(booker_username) references booker(username)
 
 )
+
+
+
+insert into `555_2020-11-27_booked` values(3, 24,'Abhishek9934');
