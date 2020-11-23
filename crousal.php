@@ -15,6 +15,28 @@ include("auth.php");
 // }
 // else{
 
+  require('db.php');
+
+$query = "select * from `".$_SESSION["train_id"]."_".$_SESSION["date"]."_booked`;";
+$result = mysqli_query($con , $query);
+
+$disable = array_fill(1, 1+ $_SESSION["num_sl"]*24 +$_SESSION["num_ac"]* 18 , '');
+// $disable[192] = 'disabled';
+
+while($row = mysqli_fetch_assoc($result)){      
+  $coach = $row["coach_num"];
+  $seat  = $row["seat_num"];
+  if($coach <= $_SESSION["num_sl"]){
+    $index = ($coach-1) * 24 + $seat;}
+  else{
+    $index = $_SESSION["num_sl"] * 24 + ($coach - $_SESSION["num_sl"] -1 ) * 18 + $seat;
+  }
+
+  $disable[$index] = 'disabled';
+  
+}
+
+
 ?>
 
 
@@ -84,9 +106,14 @@ body {
 }
 
 #ck-button input:checked + span {
-    background-color:#911;
+    background-color:blue;
     color:#fff;
 }
+
+#ck-button input[disabled] + span{
+
+  background-color:#911;
+    color:#fff;}
   </style>
 
 
@@ -132,37 +159,37 @@ body {
     
     <div class="container">
         <div class="row" style="margin-left: 360px;">
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[1]; ?> name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[4]; ?> name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[9]; ?> name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[12]; ?> name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[17]; ?> name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[20]; ?> name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[2]; ?> name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[5]; ?> name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[10]; ?> name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[13]; ?> name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[18]; ?> name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[21]; ?> name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[3]; ?> name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[6]; ?> name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[11]; ?> name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[14]; ?> name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[19]; ?> name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[22]; ?> name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[7]; ?> name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[8]; ?> name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[15]; ?> name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[16]; ?> name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[23]; ?> name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[24]; ?> name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
         </div>
 
         <div class="row text-center ">
@@ -177,38 +204,38 @@ body {
 
     <div class="item  ">
        <div class="container">
-       <div class="row" style="margin-left: 360px;">
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
+        <div class="row" style="margin-left: 360px;">
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+ 1]; ?> name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+4]; ?> name ="seats[]" type="checkbox" value="4"><span>4 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+9]; ?> name ="seats[]" type="checkbox" value="9"><span>9 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+12]; ?> name ="seats[]" type="checkbox" value="12"><span>12 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+17]; ?> name ="seats[]" type="checkbox" value="17"><span>17 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$x*24+20]; ?> name ="seats[]" type="checkbox" value="20"><span>20 LB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+2]; ?> name ="seats[]" type="checkbox" value="2"><span>2 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+5]; ?> name ="seats[]" type="checkbox" value="5"><span>5 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+10]; ?> name ="seats[]" type="checkbox" value="10"><span>10 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+13]; ?> name ="seats[]" type="checkbox" value="13"><span>13 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+18]; ?> name ="seats[]" type="checkbox" value="18"><span>18 MB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+21]; ?> name ="seats[]" type="checkbox" value="21"><span>21 MB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+3]; ?> name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+6]; ?> name ="seats[]" type="checkbox" value="6"><span>6 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+11]; ?> name ="seats[]" type="checkbox" value="11"><span>11 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+14]; ?> name ="seats[]" type="checkbox" value="14"><span>14 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+19]; ?> name ="seats[]" type="checkbox" value="19"><span>19 UB</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+22]; ?> name ="seats[]" type="checkbox" value="22"><span>22 UB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
-           <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+7]; ?> name ="seats[]" type="checkbox" value="7"><span>7 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+8]; ?> name ="seats[]" type="checkbox" value="8"><span>8 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+15]; ?> name ="seats[]" type="checkbox" value="15"><span>15 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+16]; ?> name ="seats[]" type="checkbox" value="16"><span>16 SU</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+23]; ?> name ="seats[]" type="checkbox" value="23"><span>23 SL</span></label></div>
+           <div id="ck-button"><label> <input <?php echo $disable[$x*24+24]; ?> name ="seats[]" type="checkbox" value="24"><span>24 SU</span></label></div>
         </div>
         <div class="row text-center ">
           <h3>SL<?php echo $x+1;  ?></h3>
@@ -250,32 +277,33 @@ body {
     
     <div class="container">
         <div class="row" style="margin-left: 360px;">
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 1]; ?> name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 2]; ?> name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 7]; ?> name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 +8 ]; ?> name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 13]; ?> name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 14]; ?> name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
 
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
+
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 3]; ?> name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 4]; ?> name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 9]; ?> name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 10]; ?> name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 15]; ?> name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 16]; ?> name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
    
             
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 5]; ?> name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 6]; ?> name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 11]; ?> name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 12]; ?> name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 17]; ?> name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 18]; ?> name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
 
         </div>
        </div>
@@ -291,32 +319,33 @@ body {
     <div class="item  ">
        <div class="container">
        <div class="row" style="margin-left: 360px;">
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 1 +$x*18]; ?> name ="seats[]" type="checkbox" value="1"><span>1 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 2 +$x*18]; ?> name ="seats[]" type="checkbox" value="2"><span>2 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 7 +$x*18]; ?> name ="seats[]" type="checkbox" value="7"><span>7 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 8  +$x*18]; ?> name ="seats[]" type="checkbox" value="8"><span>8 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 13 +$x*18]; ?> name ="seats[]" type="checkbox" value="13"><span>13 LB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 14 +$x*18]; ?> name ="seats[]" type="checkbox" value="14"><span>14 LB</span></label></div>
 
         </div>
         <div class="row" style="margin-left: 360px;">
 
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
+
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 3 +$x*18]; ?> name ="seats[]" type="checkbox" value="3"><span>3 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 4 +$x*18]; ?> name ="seats[]" type="checkbox" value="4"><span>4 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 9 +$x*18]; ?> name ="seats[]" type="checkbox" value="9"><span>9 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 10 +$x*18]; ?> name ="seats[]" type="checkbox" value="10"><span>10 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 15 +$x*18]; ?> name ="seats[]" type="checkbox" value="15"><span>15 UB</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 16 +$x*18]; ?> name ="seats[]" type="checkbox" value="16"><span>16 UB</span></label></div>
         </div>
         <div class="row" style="margin-left: 360px;">
    
             
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
-            <div id="ck-button"><label> <input name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 5 +$x*18]; ?> name ="seats[]" type="checkbox" value="5"><span>5 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 6 +$x*18]; ?> name ="seats[]" type="checkbox" value="6"><span>6 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 11 +$x*18]; ?> name ="seats[]" type="checkbox" value="11"><span>11 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 12 +$x*18]; ?> name ="seats[]" type="checkbox" value="12"><span>12 SL</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 17 +$x*18]; ?> name ="seats[]" type="checkbox" value="17"><span>17 SU</span></label></div>
+            <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 18 +$x*18]; ?> name ="seats[]" type="checkbox" value="18"><span>18 SL</span></label></div>
 
         </div>
         </div>
@@ -346,9 +375,9 @@ body {
 
   </div>
 </div>
-
+<div class="container text-center">
 <button type="submit" class="btn btn-primary"> Book Tickets </button>
-
+<div>
 </form>
 <div>
 

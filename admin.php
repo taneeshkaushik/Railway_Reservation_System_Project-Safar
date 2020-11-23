@@ -109,6 +109,7 @@ if (isset($_REQUEST['journey_date'])){
     coach_num varchar(6) not null, 
     seat_num int not null,
     booker_username varchar(255) not null, 
+    primary key(seat_num, coach_num),
     FOREIGN key(booker_username) references booker(username)
   );";
 
