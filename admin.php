@@ -96,17 +96,36 @@ if (isset($_REQUEST['journey_date'])){
   $num_ac = $_REQUEST['num_ac'];
 
   $num_sl = $_REQUEST['num_sl'];
+ // $train=strval($train_id);
+  //$date=$journey_date->format('Y-m-d');
 
   // echo $train_id . $journey_date .$num_ac .$num_sl;
-  $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`) values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
-  $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
-  $result = mysqli_query($con,$query2);
-  $result1 = mysqli_query($con,$query1);
-  if($result1 and $result){
-  //echo "train added successfully for date".$journey_date;
-  header("Location: admin.php");
+  $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`)
+   values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
+  $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
+  values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
+  $creating_ticket_table_for_each_train= "CREATE TABLE `".$train_id."`_'".$journey_date."'_booked
+  (
+    coach_num varchar(6) not null, 
+    seat_num int not null,
+    booker_username varchar(255) not null, 
+    FOREIGN key(booker_username) references booker(username)
+  )";
 
+  
+  $result1 = mysqli_query($con,$query2);
+  $result2 = mysqli_query($con,$query1);
+  $res3= mysqli_query($con, $creating_ticket_table_for_each_train);
+  
+
+  if($result1 and   $result2 and $res3 ){
+  header("Location: success.php");
+  
   }
+  
+  echo  $result1;
+  echo $result2;
+ 
 }
         
       }

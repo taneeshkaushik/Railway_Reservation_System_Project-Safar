@@ -90,3 +90,14 @@ create table trains_running
     primary key(train_id, journey_date),
     FOREIGN key(train_id) references trains(train_id)
 );
+
+for each train running
+
+create table 'train_id_date'_booked
+(
+    coach_num varchar(6) not null, 
+    seat_num int not null,
+    booker_username varchar(255) not null, 
+    FOREIGN key(booker_username) references booker(username)
+
+)

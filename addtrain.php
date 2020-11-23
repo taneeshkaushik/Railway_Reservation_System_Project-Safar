@@ -51,7 +51,7 @@ else{
 ?>
 
 <div class="container">
-<h2 class="text-center" >YOU CAN ADD TRAINS AVAILABLE TO SYSTEM HERE</h2>
+<h2 class="text-center" >YOU CAN ADD TRAINS WHICH WILL BE AVAILABLE TO SYSTEM HERE</h2>
 
 <div class="well">
 
