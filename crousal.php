@@ -9,8 +9,14 @@ include("auth.php");
 if(isset($_REQUEST["submit"])){
 
 $_SESSION["seats"] = $_REQUEST["seats"];
+if(count($_SESSION["seats"]) == 0)
+{
+       echo '<script>alert("No seat selected"); history.go(-1);</script>'; 
+}
+else {
 
 header("Location:add_seats.php");
+}
 
 }
 
@@ -176,6 +182,10 @@ body {
     
     <div class="container">
        <!-- <input type="hidden" name=> </input> -->
+       <?php if($_SESSION["num_sl"] == 0)  {
+          echo 'Sleeper Coach not available !';
+       } else { 
+       ?>
         <div class="row" style="margin-left: 360px;">
             <div id="ck-button"><label> <input <?php echo $disable[1]; ?> name ="seats[]" type="checkbox" value="1_1" ><span>1 LB</span></label></div>
             <div id="ck-button"><label> <input <?php echo $disable[4]; ?> name ="seats[]" type="checkbox" value="1_4"><span>4 LB</span></label></div>
@@ -278,7 +288,7 @@ body {
       <span class="sr-only">Next</span>
     </a>
 
-
+  <?php } ?>
   </div>
 </div>
 
@@ -294,6 +304,11 @@ body {
     <div class="item active ">
     
     <div class="container">
+    <?php if($_SESSION["num_ac"] == 0)  {
+          echo 'AC Coach not available !';
+       } else { 
+       ?>
+      
         <div class="row" style="margin-left: 360px;">
             <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 1]; ?> name ="seats[]" type="checkbox" value="<?php echo $_SESSION["num_sl"]+1; ?>_1"><span>1 LB</span></label></div>
             <div id="ck-button"><label> <input <?php echo $disable[$_SESSION["num_sl"]* 24 + 2]; ?> name ="seats[]" type="checkbox" value="<?php echo $_SESSION["num_sl"]+1; ?>_2"><span>2 LB</span></label></div>
@@ -390,13 +405,16 @@ body {
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
-
+    <?php } ?>
 
   </div>
 </div>
+
 <div class="container text-center">
 <button type="submit" name="submit" class="btn btn-primary"> Book Tickets </button>
 <div>
+
+
 </form>
 
 <?php } ?>

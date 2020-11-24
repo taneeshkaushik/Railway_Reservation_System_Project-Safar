@@ -69,11 +69,10 @@ $query = "INSERT INTO `booker` (`username`, `Name`,`address`, `email`, `mobile`,
          $res3 = mysqli_query($con,$q3);
 
          if($res1 and $res2 and $res3) {
+     echo '<script>alert("You are registered Successfully."); history.go(-2);</script>'; 
 
-
-            echo "<div class='form'>
-<h3>You are registered successfully.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>"; } else { echo "some erroe in table registration"  ;}
+       
+} else {    echo '<script>alert("Some Error in registration"); history.go(-1);</script>';  }
         }
 
     }

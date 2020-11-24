@@ -6,6 +6,31 @@ include("auth.php");
 ?>
 
 
+<?php  
+  // include ('db.php');
+
+  if(isset($_REQUEST["submit"])){
+  
+  $q = "select * from `sensitive_info`";
+  $run = mysqli_query($con , $q);
+  $row = mysqli_fetch_assoc($run);
+
+  // echo $_REQUEST["key"] . " " .$row['high_security_key'];
+  
+   if ($_REQUEST["key"] == $row['high_security_key'] ){
+       header("Location:addtrain.php");
+   }
+   else{
+      //  header("Location:admin.php");
+           echo '<script>alert("Incorrect Key"); history.go(-1);</script>'; 
+   }
+  }
+
+else {
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,10 +105,10 @@ include("auth.php");
            ?>
            <input type="hidden" required="True" name ="train_no" value = <?php echo $row["train_id"]; ?> >  </input>
          </td>
-         <td><input type="date" required="True" name ="journey_date">  </input> </td>
-         <td><input  type="number" value="0" required="True" name ="num_sl"> </input> </td>
-         <td><input type="number" value="0" required="True" name ="num_ac"> </input> </td>
-         <td><button type="submit" > Add </button>   </td>
+         <td><input type="date"   min="<?php  echo date('Y-m-d'); ?>" required="True" name ="journey_date">  </input> </td>
+         <td><input  type="number" min ="0" value="0" required="True" name ="num_sl"> </input> </td>
+         <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
+         <td><button class="btn btn-primary" type="submit" > Add </button>   </td>
         </form>
         </tr>
          <?php
@@ -120,8 +145,9 @@ if (isset($_REQUEST['journey_date'])){
   
 
   if($result1 and   $result2 and $res3 ){
-  
-  header("Location: admin.php");
+       echo '<script>alert("Train added now available for booking."); history.go(-1);</script>'; 
+
+  // header("Location: admin.php");
   
   }
   
@@ -153,28 +179,6 @@ if (isset($_REQUEST['journey_date'])){
 
 </div>
 
-<?php  
-  // include ('db.php');
-
-  if(isset($_REQUEST["submit"])){
-  
-  $q = "select * from `sensitive_info`";
-  $run = mysqli_query($con , $q);
-  $row = mysqli_fetch_assoc($run);
-
-  // echo $_REQUEST["key"] . " " .$row['high_security_key'];
-  
-   if ($_REQUEST["key"] == $row['high_security_key'] ){
-       header("Location:addtrain.php");
-   }
-   else{
-       header("Location:admin.php");
-   }
-  }
-
-else {
-
-?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

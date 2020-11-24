@@ -100,7 +100,9 @@ if(mysqli_num_rows($result) >0){
   header("Location:crousal.php");
 }
 else{
-  echo "Train not available";
+  // echo "Train not available";
+  echo '<script>alert("Train Not Available."); history.go(-1);</script>'; 
+
 }
 
 }
@@ -137,7 +139,7 @@ else{
           </div>
           <div class="form-group">
             <label for="journey_date" class="col-form-label"> Journey Date:</label>
-            <input type="date" class="form-control" name="journey_date" required="true">
+            <input type="date" min="<?php  echo date('Y-m-d'); ?>" class="form-control" name="journey_date" required="true">
           </div>
           <!-- <div class="form-group-inline">
 

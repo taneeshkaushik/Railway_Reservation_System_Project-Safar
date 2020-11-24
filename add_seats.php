@@ -65,6 +65,8 @@ if(isset($_REQUEST["submit"])){
   
   $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
   $result2 = mysqli_query($con,$query2);
+      //  echo '<script>alert("Tickets Booked Successfully"); history.go(-1);</script>'; 
+
 
   header("Location:crousal.php");
 
@@ -111,6 +113,7 @@ else{
 <form method="post" >
         <?php
         $x = 0 ;
+
         while($x < count($_SESSION["seats"])) {
             $x++;
         ?>
