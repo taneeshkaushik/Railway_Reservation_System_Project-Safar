@@ -2,13 +2,54 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
-echo $_SESSION["train_id"];
-echo $_SESSION["date"];
-echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
+include("db.php");
+// echo $_SESSION["train_id"];
+// echo $_SESSION["date"];
+// echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
 
-   foreach ($_SESSION["seats"] as $v){
-        echo $v."*";      
-       }
+  //  foreach ($_SESSION["seats"] as $v){
+  //       echo $v."*";      
+  //      }
+
+if(isset($_REQUEST["submit"])){
+
+  $query = "select last_pnr_used from `sensitive_info`;";
+  $result = mysqli_query($con , $query);
+  $r = mysql_fetch_assoc($result);
+
+  $pnr = $r["last_pnr_used"] + 1;
+  
+  $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
+  $result2 = mysqli_query($con,$query2);
+   
+
+  // $index  = $_REQUEST["pass"];
+  $name = $_REQUEST["name"];
+  $age = $_REQUEST["age"];
+  $gender = $_REQUEST["gender"];
+  $seats  = $_SESSION["seats"];
+  $x = 0;
+  while($x < count($name)){
+    $st = explode("_", seats[$x]);
+    // echo "Name: ".$name[$x];
+    // echo 
+
+  ///tables insertion queries begin here 
+  $q1 = "insert into `".$_SESSION["train_id"]."_".$_SESSION["date"]."_booked` (`coach_num` , `seat_num` ,`booker_username`)
+         values ('$st[0]', '$st[1]' , '$_SESSION['userid']');";
+
+  $q2 = "insert into `".$_SESSION['userid']."_passengers  ; ";
+
+  $q3 = "insert into `".$_SESSION['userid']."_tic_pas ` (`pnr` , `passenger_id`) values('$pnr' )  ;" ;
+
+  $q4 = "insert into `".$_SESSION['userid']."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ('$pnr' , '$_SESSION['train_id']' , '$_SESSION['date']') ;";
+  
+ $x++;
+  }
+
+}
+else{
+
 ?>
 
 
@@ -56,10 +97,13 @@ echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
           <div id="booking-form" class="form-group">
             <h3 class="text-center"> Passenger <?php echo $x; ?> Details </h3>
 
+
             <label  class="col-form-label"> Name:</label>
             <input type="text" class="form-control" name="name[]" required="true">
+
             <label for="recipient-name" class="col-form-label">Age:</label>
             <input type="text" class="form-control" name="age[]" required="true">
+
             <label for="" class="col-form-label"> Gender:</label>
             <div class="form-group-inline">
             <select name = "gender[]" class="browser-default custom-select ">
@@ -67,8 +111,21 @@ echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Oth">Other</option>
-            </select> 
-            </div>       
+            </select>             </div>       
+
+            <label> Seat No:</label>
+            <input type="text" class="form-control" name="seat[]"  value="<?php 
+            $s = explode("_", $_SESSION["seats"][$x-1]);
+             
+            if($s[0] <= $_SESSION["num_sl"]){
+              echo "SL".$s[0].", ".$s[1] ;
+            }
+            else{
+              echo "AC".($s[0] - $_SESSION["num_sl"]).", ".$s[1];
+            }
+             
+             
+             ?>" disabled> </input> 
           </div >
         <?php } ?>
        <button class="btn btn-success pull-right" type ="submit" name ="submit"> Book ticket </button>
@@ -79,7 +136,7 @@ echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
 
 
 
-
+<?php } ?>
 
 </body>
 </html>
