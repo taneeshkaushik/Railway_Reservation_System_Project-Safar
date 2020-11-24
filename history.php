@@ -24,7 +24,8 @@ include("auth.php");
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-    <ul class="nav navbar-nav">    
+    <ul class="nav navbar-nav"> 
+    <li><a href="admin.php"> Back </a></li>
     <!-- <li><a href="history.php"> History </a></li>
     <li><a href="addtrain.php"> Add Train </a></li> -->
   

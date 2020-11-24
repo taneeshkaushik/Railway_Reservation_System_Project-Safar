@@ -28,10 +28,15 @@ if (isset($_REQUEST['token'])){
 
  $password1 = stripslashes($_REQUEST['password1']);
  $password1 = mysqli_real_escape_string($con,$password1);
+ $q = "select become_admin from `sensitive_info`";
+ $run = mysqli_query($con , $q);
+ $row = mysqli_fetch_assoc($run);
+
+//  echo $row['become_admin'];
 
 //  echo $userid . $name .$email.$phone.$address.$password;
 
-if($password == $password1 and $token == 'special')
+if(.md5($password) == .md5($password1) and .md5($token) == .md5($row['become_admin']))
 {
 
 $query = "INSERT INTO `admin` (`username`, `name`, `designation`, `email`, `mobile`,`password`) VALUES ('$userid', '$name','$designation' , '$email', '$phone' , '".md5($password)."' );";

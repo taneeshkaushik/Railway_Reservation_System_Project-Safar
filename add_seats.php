@@ -3,8 +3,6 @@
 //include auth.php file on all secure pages
 include("auth.php");
 include("db.php");
-// echo $_SESSION["train_id"];
-// echo $_SESSION["date"];
 // echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
 
   //  foreach ($_SESSION["seats"] as $v){
@@ -15,37 +13,60 @@ if(isset($_REQUEST["submit"])){
 
   $query = "select last_pnr_used from `sensitive_info`;";
   $result = mysqli_query($con , $query);
-  $r = mysql_fetch_assoc($result);
+  $r = mysqli_fetch_assoc($result);
+
 
   $pnr = $r["last_pnr_used"] + 1;
-  
-  $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
-  $result2 = mysqli_query($con,$query2);
-   
-
+  // echo $pnr;
+  // echo "dkkdkd";
   // $index  = $_REQUEST["pass"];
   $name = $_REQUEST["name"];
   $age = $_REQUEST["age"];
   $gender = $_REQUEST["gender"];
   $seats  = $_SESSION["seats"];
+  $aadhar = $_REQUEST["aadhar"];
   $x = 0;
+  // echo $seats[$x];
+  $train_id = $_SESSION["train_id"];
+  $journey_date = $_SESSION["date"];
+  $username = $_SESSION['userid'];
+  $q2 = "INSERT into `".$username."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ($pnr , $train_id , '$journey_date' ) ;";
+  // echo $q2;
+  $res2  = mysqli_query($con , $q2);
+
   while($x < count($name)){
-    $st = explode("_", seats[$x]);
-    // echo "Name: ".$name[$x];
-    // echo 
+    $st = explode("_", $seats[$x]);
+    // echo $st[0]."**".$st[1];
+    // echo $_SESSION['userid'];
 
   ///tables insertion queries begin here 
-  $q1 = "insert into `".$_SESSION["train_id"]."_".$_SESSION["date"]."_booked` (`coach_num` , `seat_num` ,`booker_username`)
-         values ('$st[0]', '$st[1]' , '$_SESSION['userid']');";
+  $q1 = "INSERT INTO `".$train_id."_".$journey_date."_booked` (`coach_num` , `seat_num` ,`booker_username`) VALUES ($st[0] , $st[1] , '$username' ) ;";
+  // echo $q1;
+  $res1 = mysqli_query($con , $q1);
+        
 
-  $q2 = "insert into `".$_SESSION['userid']."_passengers  ; ";
+  $search_query = "SELECT * from `".$username."_passengers` where aadhar = $aadhar[$x]; ";
+  // echo $search_query;
+  $res = mysqli_query($con , $search_query);
+  if(mysqli_num_rows($res) == 0){
+      $q3 = "INSERT into `".$username."_passengers` (`aadhar` , `name` , `age` ,`sex`) values ('$aadhar[$x]' ,'$name[$x]' , '$age[$x]' ,'$gender[$x]' ) ;";
+      $res3  = mysqli_query($con , $q3);
+      // echo $q3;
+    }
 
-  $q3 = "insert into `".$_SESSION['userid']."_tic_pas ` (`pnr` , `passenger_id`) values('$pnr' )  ;" ;
-
-  $q4 = "insert into `".$_SESSION['userid']."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ('$pnr' , '$_SESSION['train_id']' , '$_SESSION['date']') ;";
+  $q4 = "INSERT into `".$username."_tic_pas` (`pnr` , `aadhar`) values($pnr , $aadhar[$x] ) ;" ;
+  // // echo $q4;
+  $res4 = mysqli_query($con, $q4);
+  
   
  $x++;
   }
+
+  
+  $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
+  $result2 = mysqli_query($con,$query2);
+
+  header("Location:crousal.php");
 
 }
 else{
@@ -100,6 +121,9 @@ else{
 
             <label  class="col-form-label"> Name:</label>
             <input type="text" class="form-control" name="name[]" required="true">
+            
+            <label  class="col-form-label"> Aadhar No:</label>
+            <input type="text" class="form-control" name="aadhar[]" required="true">
 
             <label for="recipient-name" class="col-form-label">Age:</label>
             <input type="text" class="form-control" name="age[]" required="true">

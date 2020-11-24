@@ -120,7 +120,8 @@ if (isset($_REQUEST['journey_date'])){
   
 
   if($result1 and   $result2 and $res3 ){
-  header("Location: success.php");
+  
+  header("Location: admin.php");
   
   }
   
@@ -152,6 +153,28 @@ if (isset($_REQUEST['journey_date'])){
 
 </div>
 
+<?php  
+  // include ('db.php');
+
+  if(isset($_REQUEST["submit"])){
+  
+  $q = "select * from `sensitive_info`";
+  $run = mysqli_query($con , $q);
+  $row = mysqli_fetch_assoc($run);
+
+  // echo $_REQUEST["key"] . " " .$row['high_security_key'];
+  
+   if ($_REQUEST["key"] == $row['high_security_key'] ){
+       header("Location:addtrain.php");
+   }
+   else{
+       header("Location:admin.php");
+   }
+  }
+
+else {
+
+?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -162,16 +185,22 @@ if (isset($_REQUEST['journey_date'])){
         </button>
       </div>
       <div class="modal-body">
-          <form action="addtrain.php" method="post">
+
+
+          <form action="" method="post">
            Enter High Security Key <input type="password" name="key"><br>
         <hr>
-        <input type="submit">
+        <input name="submit" type="submit" class="btn btn-primary"> </input>
         </form>
+
+
       </div>
 
     </div>
   </div>
 </div>
+
+<?php } ?>
 
 
 
