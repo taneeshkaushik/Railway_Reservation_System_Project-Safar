@@ -38,6 +38,9 @@ if(isset($_REQUEST["submit"])){
   $q1 = "insert into `".$_SESSION["train_id"]."_".$_SESSION["date"]."_booked` (`coach_num` , `seat_num` ,`booker_username`)
          values ('$st[0]', '$st[1]' , '$_SESSION['userid']');";
 
+
+
+         
   $q2 = "insert into `".$_SESSION['userid']."_passengers  ; ";
 
   $q3 = "insert into `".$_SESSION['userid']."_tic_pas ` (`pnr` , `passenger_id`) values('$pnr' )  ;" ;

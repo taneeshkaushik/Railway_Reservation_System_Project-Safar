@@ -64,7 +64,7 @@ create table (booker_name)_ticket_table
 
 create table (booker_name)_passengers
 (
-    id INT AUTO_INCREMENT,
+    aadhar INT NOT NULL,
     name text,
     age int,
     sex TINYINT,
