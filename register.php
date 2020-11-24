@@ -48,20 +48,20 @@ $query = "INSERT INTO `booker` (`username`, `Name`,`address`, `email`, `mobile`,
 
          $q2 = "CREATE table ".$userid."_passengers
           (
-              id INT AUTO_INCREMENT,
+              aadhar INT NOT NULL,
               name text,
               age int,
-              sex TINYINT,
-              PRIMARY key(id)
+              sex varchar(20),
+              PRIMARY key(aadhar)
           );";
 
          $q3 = "CREATE table ".$userid."_tic_pas
          (
              pnr int not null,
-             passenger_id int not null,
-             primary key(pnr, passenger_id),
+             aadhar int not null,
+             primary key(pnr, aadhar),
              foreign key(pnr) REFERENCES ".$userid."_ticket_table(pnr), 
-             foreign key (passenger_id) REFERENCES ".$userid."_passengers(id)
+             foreign key (aadhar) REFERENCES ".$userid."_passengers(aadhar)
          
          );";
          $res1 = mysqli_query($con,$q1);

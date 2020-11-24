@@ -35,11 +35,16 @@ require('db.php');
 <?php
 
 if(isset($_REQUEST["train_no"])){
+    $userid = $_SESSION['userid'];
     $train_no = $_REQUEST['train_no'];
-    echo $train_no;
+    // echo $train_no;
     $query = "INSERT INTO `trains` (`train_id`) VALUES ('$train_no');";
+    $query1 = "INSERT INTO `".$userid."_trains` (`train_id`) VALUES ('$train_no');";
+
     $result = mysqli_query($con , $query);
-    if($result)
+    $result1 = mysqli_query($con , $query1);
+    
+    if($result and $result1)
     {
      // echo '<script>alert("Train Inserted Successfully"); history.go(-1);</script>'; 
 
