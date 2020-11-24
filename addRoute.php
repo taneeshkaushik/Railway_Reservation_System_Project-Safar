@@ -1,6 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
+require('db.php');
 ?>
 
 
@@ -18,18 +19,11 @@ include("auth.php");
 </head>
 <body>
 
-
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">RailWay</a>
+      <a class="navbar-brand" >Welcome to the Admin Portal</a>
     </div>
-    <ul class="nav navbar-nav">
-      <!-- <li class="active"><a href="#">Check PNR</a></li> -->
-
-      <li><a href="booking_history.php">Your Bookings</a></li>
-    </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -38,24 +32,8 @@ include("auth.php");
   </div>
 </nav>
 
-<header >
- <h2 class="text-center">
-  Railway Registration System
- </h2>
-</header>
 
 
 
 
-<div class="container ">
-     
-     <h3 class="text-center"><a style ="width:200px " class="btn btn-primary" href="bookticket.php">   Book New Ticket </a></h3>
 
-     
-     <h3 class="text-center"><a style ="width:200px " class="btn btn-primary" href="searchTrain.php"> Search For Trains </a></h3>
-
-<div>
-
-
-</body>
-</html>

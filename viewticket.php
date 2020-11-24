@@ -8,7 +8,7 @@ include("auth.php");
 <html>
 <head>
 <meta charset="utf-8">
-<title>Railway</title>
+<title>Registration</title>
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,38 +37,3 @@ include("auth.php");
     </ul>
   </div>
 </nav>
-
-<header >
- <h2 class="text-center">
-  Welcome to Search Portal
- </h2>
-</header>
-
-
-<div class="container well"> 
-     <form>
-     <h2 class="text-center">
-Search for Trains     </h2>
-     <hr>
-    <div class="form-group">
-    <label  class="col-form-label"> Starting Station:</label>
-      <input type="text" class="form-control" id="source" placeholder="From*" required="true">
-    </div>
-    
-    <div class="form-group">
-    <label  class="col-form-label">End Station:</label>
-      <input type="text" class="form-control" id="dest" placeholder="To*" required="true">
-    </div>
-
-  <div class="form-group">
-  <label  class="col-form-label">Choose date of Travel:</label>
-    <input type="date" class="form-control" id="traveldate" required="true" >
-  </div>
-
-  <button type="submit" class="btn btn-primary"> Find Trains</button>
-</form>
-</div>
-
-
-</body>
-</html>

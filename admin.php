@@ -52,6 +52,8 @@ else {
     <div class="navbar-header">
     <ul class="nav navbar-nav">    
     <li><a href="history.php"> History </a></li>
+    <li><a href="trainhistory.php">Train History </a></li>
+
     <li><a data-toggle="modal" data-target="#exampleModal"> Add Train </a></li>
   
       <!-- <a class="navbar-brand" >Welcome to the Admin Portal</a> -->
@@ -86,11 +88,11 @@ else {
 
         <table class="table ">
         <tr>
-          <th> Train Number  </th>
-          <th> Journey Date  </th>
-          <th> Add Sleeper Coach </th>
-          <th> Add AC Coach </th>
-          <th> Action </th>     
+          <th class="text-center"> Train Number  </th>
+          <th class="text-center"> Journey Date  </th>
+          <th class="text-center"> Add Sleeper Coach </th>
+          <th class="text-center"> Add AC Coach </th>
+          <th class="text-center"> Action </th>     
         </tr>
 
        <?php
@@ -145,14 +147,14 @@ if (isset($_REQUEST['journey_date'])){
   
 
   if($result1 and   $result2 and $res3 ){
-       echo '<script>alert("Train added now available for booking."); history.go(-1);</script>'; 
+      //  echo '<script>alert("Train added now available for booking."); history.go(-1);</script>'; 
 
-  // header("Location: admin.php");
+  header("Location: admin.php");
   
   }
   
-  echo  $result1;
-  echo $result2;
+  // echo  $result1;
+  // echo $result2;
  
 }
         

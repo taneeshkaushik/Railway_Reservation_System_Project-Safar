@@ -137,9 +137,9 @@ body {
       <a class="navbar-brand" href="#">RailWay</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Check PNR</a></li>
+      <!-- <li class="active"><a href="#">Check PNR</a></li> -->
 
-      <li><a href="#">Your Bookings</a></li>
+      <li><a href="booking_history.php">Your Bookings</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
