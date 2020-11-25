@@ -1,7 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 require('db.php');
-include("auth.php");
+include("admin_auth.php");
 
 ?>
 
@@ -60,7 +60,7 @@ else {
     </ul>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['admin']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
     </ul>
@@ -129,7 +129,7 @@ if (isset($_REQUEST['journey_date'])){
   // echo $train_id . $journey_date .$num_ac .$num_sl;
   $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`)
    values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
-  $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
+  $query1 = "insert into `".$_SESSION['admin']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
   values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
   $creating_ticket_table_for_each_train= "CREATE TABLE `".$train_id."_".$journey_date."_booked`
   (

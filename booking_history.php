@@ -59,7 +59,7 @@ include("auth.php");
           <th class="text-center"> PNR Number  </th>
           <th class="text-center"> Train No </th>
           <th class="text-center"> Ticket  Date </th>
-          <th class="text-center"> Action </th>
+          <!-- <th class="text-center"> Action </th> -->
 
         </tr>
 
@@ -78,7 +78,7 @@ include("auth.php");
          <td>
            <?php echo $row["ticket_date"] ?>
          </td>
-         <td> <button >View More</button>  </td>
+         <!-- <td> <button >View More</button>  </td> -->
 
   
         </tr>

@@ -1,6 +1,6 @@
 <?php
 //include auth.php file on all secure pages
-include("auth.php");
+include("admin_auth.php");
 require('db.php');
 ?>
 

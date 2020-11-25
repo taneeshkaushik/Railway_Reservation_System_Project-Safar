@@ -1,7 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 
-include("auth.php");
+include("admin_auth.php");
 ?>
 
 
@@ -33,7 +33,7 @@ include("auth.php");
     </ul>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['admin']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
     </ul>
@@ -50,7 +50,7 @@ include("auth.php");
     
     <?php
        require('db.php');
-       $query = "SELECT * FROM ".$_SESSION['userid']."_trains";
+       $query = "SELECT * FROM ".$_SESSION['admin']."_trains";
        $result = mysqli_query($con,$query) or die(mysql_error());
        
        if(mysqli_num_rows($result) >0) {

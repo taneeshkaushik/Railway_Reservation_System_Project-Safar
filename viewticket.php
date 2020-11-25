@@ -37,3 +37,9 @@ include("auth.php");
     </ul>
   </div>
 </nav>
+
+<div class="container well">
+   <h2> PNR: </h2>
+
+
+</div>
