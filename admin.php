@@ -92,7 +92,9 @@ else {
           <th class="text-center"> Journey Date  </th>
           <th class="text-center"> Add Sleeper Coach </th>
           <th class="text-center"> Add AC Coach </th>
-          <th class="text-center"> Action </th>     
+          <th class="text-center"> Release Train</th>
+          
+          <!-- <th class="text-center"> Add Route</th>      -->
         </tr>
 
        <?php
@@ -110,7 +112,9 @@ else {
          <td><input type="date"   min="<?php  echo date('Y-m-d'); ?>" required="True" name ="journey_date">  </input> </td>
          <td><input  type="number" min ="0" value="0" required="True" name ="num_sl"> </input> </td>
          <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
-         <td><button class="btn btn-primary" type="submit" > Add </button>   </td>
+         <td><button class="btn btn-primary" type="submit" > Release </button>   </td>
+         <!-- <td><button class="btn btn-warning" href= > Add </button>   </td> -->
+
         </form>
         </tr>
          <?php
