@@ -104,6 +104,9 @@ create table 'train_id_date'_booked
 
 )
 
+create table `sensitive_info` (
 
-
-insert into `555_2020-11-27_booked` values(3, 24,'Abhishek9934');
+    last_pnr_used int(255) not null;
+    become_admin varchar(255) not null;
+    high_security_key(255) not null;
+);

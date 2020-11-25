@@ -1,7 +1,32 @@
 <?php
 //include auth.php file on all secure pages
 require('db.php');
-include("auth.php");
+include("admin_auth.php");
+
+?>
+
+
+<?php  
+  // include ('db.php');
+
+  if(isset($_REQUEST["submit"])){
+  
+  $q = "select * from `sensitive_info`";
+  $run = mysqli_query($con , $q);
+  $row = mysqli_fetch_assoc($run);
+
+  // echo $_REQUEST["key"] . " " .$row['high_security_key'];
+  
+   if ($_REQUEST["key"] == $row['high_security_key'] ){
+       header("Location:addtrain.php");
+   }
+   else{
+      //  header("Location:admin.php");
+           echo '<script>alert("Incorrect Key"); history.go(-1);</script>'; 
+   }
+  }
+
+else {
 
 ?>
 
@@ -27,13 +52,15 @@ include("auth.php");
     <div class="navbar-header">
     <ul class="nav navbar-nav">    
     <li><a href="history.php"> History </a></li>
+    <li><a href="trainhistory.php">Train History </a></li>
+
     <li><a data-toggle="modal" data-target="#exampleModal"> Add Train </a></li>
   
       <!-- <a class="navbar-brand" >Welcome to the Admin Portal</a> -->
     </ul>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['admin']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
     </ul>
@@ -61,11 +88,11 @@ include("auth.php");
 
         <table class="table ">
         <tr>
-          <th> Train Number  </th>
-          <th> Journey Date  </th>
-          <th> Add Sleeper Coach </th>
-          <th> Add AC Coach </th>
-          <th> Action </th>     
+          <th class="text-center"> Train Number  </th>
+          <th class="text-center"> Journey Date  </th>
+          <th class="text-center"> Add Sleeper Coach </th>
+          <th class="text-center"> Add AC Coach </th>
+          <th class="text-center"> Action </th>     
         </tr>
 
        <?php
@@ -80,10 +107,10 @@ include("auth.php");
            ?>
            <input type="hidden" required="True" name ="train_no" value = <?php echo $row["train_id"]; ?> >  </input>
          </td>
-         <td><input type="date" required="True" name ="journey_date">  </input> </td>
-         <td><input  type="number" value="0" required="True" name ="num_sl"> </input> </td>
-         <td><input type="number" value="0" required="True" name ="num_ac"> </input> </td>
-         <td><button type="submit" > Add </button>   </td>
+         <td><input type="date"   min="<?php  echo date('Y-m-d'); ?>" required="True" name ="journey_date">  </input> </td>
+         <td><input  type="number" min ="0" value="0" required="True" name ="num_sl"> </input> </td>
+         <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
+         <td><button class="btn btn-primary" type="submit" > Add </button>   </td>
         </form>
         </tr>
          <?php
@@ -102,7 +129,7 @@ if (isset($_REQUEST['journey_date'])){
   // echo $train_id . $journey_date .$num_ac .$num_sl;
   $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`)
    values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
-  $query1 = "insert into `".$_SESSION['userid']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
+  $query1 = "insert into `".$_SESSION['admin']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
   values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
   $creating_ticket_table_for_each_train= "CREATE TABLE `".$train_id."_".$journey_date."_booked`
   (
@@ -119,13 +146,14 @@ if (isset($_REQUEST['journey_date'])){
   
 
   if($result1 and   $result2 and $res3 ){
-  
+      //  echo '<script>alert("Train added now available for booking."); history.go(-1);</script>'; 
+
   header("Location: admin.php");
   
   }
   
-  echo  $result1;
-  echo $result2;
+  // echo  $result1;
+  // echo $result2;
  
 }
         
@@ -152,28 +180,6 @@ if (isset($_REQUEST['journey_date'])){
 
 </div>
 
-<?php  
-  // include ('db.php');
-
-  if(isset($_REQUEST["submit"])){
-  
-  $q = "select * from `sensitive_info`";
-  $run = mysqli_query($con , $q);
-  $row = mysqli_fetch_assoc($run);
-
-  // echo $_REQUEST["key"] . " " .$row['high_security_key'];
-  
-   if ($_REQUEST["key"] == $row['high_security_key'] ){
-       header("Location:addtrain.php");
-   }
-   else{
-       header("Location:admin.php");
-   }
-  }
-
-else {
-
-?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

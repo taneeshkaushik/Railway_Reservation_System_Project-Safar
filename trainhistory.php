@@ -44,13 +44,13 @@ include("admin_auth.php");
 
   <div class="well text-center">
 
-  <h2> Following Trains were Released by You </h2>
+  <h2> Following Trains were Added </h2>
     <div class="btn-group-vertical" style="width:100%">
   
     
     <?php
        require('db.php');
-       $query = "SELECT * FROM ".$_SESSION['admin']."_trains_added";
+       $query = "SELECT * FROM ".$_SESSION['admin']."_trains";
        $result = mysqli_query($con,$query) or die(mysql_error());
        
        if(mysqli_num_rows($result) >0) {
@@ -59,10 +59,6 @@ include("admin_auth.php");
         <table class="table ">
         <tr>
           <th class="text-center"> Train Number  </th>
-          <th class="text-center"> Journey Date added  </th>
-          <th class="text-center"> # Sleeper Coach </th>
-          <th class="text-center"> # AC Coach </th>
-
         </tr>
 
        <?php
@@ -73,15 +69,6 @@ include("admin_auth.php");
         
          <td>
            <?php echo $row["train_id"] ?>
-         </td>
-         <td>
-           <?php echo $row["date_added"] ?>
-         </td>
-         <td>
-           <?php echo $row["num_sl"] ?>
-         </td>
-         <td>
-           <?php echo $row["num_ac"] ?>
          </td>
 
 

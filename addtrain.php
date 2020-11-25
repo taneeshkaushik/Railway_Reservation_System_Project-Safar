@@ -1,6 +1,6 @@
 <?php
 //include auth.php file on all secure pages
-include("auth.php");
+include("admin_auth.php");
 require('db.php');
 ?>
 
@@ -25,7 +25,7 @@ require('db.php');
       <a class="navbar-brand" >Welcome to the Admin Portal</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['admin']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
     </ul>
@@ -35,7 +35,7 @@ require('db.php');
 <?php
 
 if(isset($_REQUEST["train_no"])){
-    $userid = $_SESSION['userid'];
+    $userid = $_SESSION['admin'];
     $train_no = $_REQUEST['train_no'];
     // echo $train_no;
     $query = "INSERT INTO `trains` (`train_id`) VALUES ('$train_no');";

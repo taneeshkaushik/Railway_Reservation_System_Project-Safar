@@ -1,7 +1,6 @@
 <?php
 //include auth.php file on all secure pages
-
-include("admin_auth.php");
+include("auth.php");
 ?>
 
 
@@ -24,16 +23,15 @@ include("admin_auth.php");
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-    <ul class="nav navbar-nav"> 
-    <li><a href="admin.php"> Back </a></li>
-    <!-- <li><a href="history.php"> History </a></li>
-    <li><a href="addtrain.php"> Add Train </a></li> -->
-  
-      <!-- <a class="navbar-brand" >Welcome to the Admin Portal</a> -->
-    </ul>
+      <a class="navbar-brand" href="#">RailWay</a>
     </div>
+    <ul class="nav navbar-nav">
+      <!-- <li class="active"><a href="#">Check PNR</a></li> -->
+
+      <li><a href="index.php">Back</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['admin']; ?></a> </li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
     </ul>
@@ -44,13 +42,13 @@ include("admin_auth.php");
 
   <div class="well text-center">
 
-  <h2> Following Trains were Released by You </h2>
+  <h2> Following Tickets were booked by You. </h2>
     <div class="btn-group-vertical" style="width:100%">
   
     
     <?php
        require('db.php');
-       $query = "SELECT * FROM ".$_SESSION['admin']."_trains_added";
+       $query = "SELECT * FROM ".$_SESSION['userid']."_ticket_table";
        $result = mysqli_query($con,$query) or die(mysql_error());
        
        if(mysqli_num_rows($result) >0) {
@@ -58,10 +56,10 @@ include("admin_auth.php");
 
         <table class="table ">
         <tr>
-          <th class="text-center"> Train Number  </th>
-          <th class="text-center"> Journey Date added  </th>
-          <th class="text-center"> # Sleeper Coach </th>
-          <th class="text-center"> # AC Coach </th>
+          <th class="text-center"> PNR Number  </th>
+          <th class="text-center"> Train No </th>
+          <th class="text-center"> Ticket  Date </th>
+          <!-- <th class="text-center"> Action </th> -->
 
         </tr>
 
@@ -72,18 +70,15 @@ include("admin_auth.php");
         <tr>
         
          <td>
+           <?php echo $row["pnr"] ?>
+         </td>
+         <td>
            <?php echo $row["train_id"] ?>
          </td>
          <td>
-           <?php echo $row["date_added"] ?>
+           <?php echo $row["ticket_date"] ?>
          </td>
-         <td>
-           <?php echo $row["num_sl"] ?>
-         </td>
-         <td>
-           <?php echo $row["num_ac"] ?>
-         </td>
-
+         <!-- <td> <button >View More</button>  </td> -->
 
   
         </tr>
@@ -97,7 +92,7 @@ include("admin_auth.php");
        }
        else{
          ?>
-       <h4> No history available </h4>
+       <h4> No Tickets Booked by You </h4>
         <?php
        }
 

@@ -79,6 +79,8 @@ if(isset($_REQUEST["submit"])){
   
   $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
   $result2 = mysqli_query($con,$query2);
+      //  echo '<script>alert("Tickets Booked Successfully"); history.go(-1);</script>'; 
+
 
   header("Location:crousal.php");
 
@@ -109,9 +111,9 @@ else{
       <a class="navbar-brand" href="#">RailWay</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Check PNR</a></li>
+      <!-- <li class="active"><a href="#">Check PNR</a></li> -->
 
-      <li><a href="#">Your Bookings</a></li>
+      <li><a href="booking_history.php">Your Bookings</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
@@ -125,6 +127,7 @@ else{
 <form method="post" >
         <?php
         $x = 0 ;
+
         while($x < count($_SESSION["seats"])) {
             $x++;
         ?>

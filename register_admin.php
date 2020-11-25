@@ -36,7 +36,7 @@ if (isset($_REQUEST['token'])){
 
 //  echo $userid . $name .$email.$phone.$address.$password;
 
-if(.md5($password) == .md5($password1) and .md5($token) == .md5($row['become_admin']))
+if($password == $password1 and $token == $row['become_admin'])
 {
 
 $query = "INSERT INTO `admin` (`username`, `name`, `designation`, `email`, `mobile`,`password`) VALUES ('$userid', '$name','$designation' , '$email', '$phone' , '".md5($password)."' );";
@@ -64,9 +64,11 @@ $query = "INSERT INTO `admin` (`username`, `name`, `designation`, `email`, `mobi
           $res2= mysqli_query($con,$query2);
           if($res1 and $res2){
 
-            echo "<div class='form'>
-<h3>You are registered successfully.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>"; } else { echo "There is some error.";}
+     echo '<script>alert("You have been registered successfully as admin"); history.go(-3);</script>'; 
+
+} else { 
+     echo '<script>alert("Some error"); history.go(-1);</script>'; 
+    }
           
         }
 

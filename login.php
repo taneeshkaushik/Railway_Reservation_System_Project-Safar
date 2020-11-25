@@ -1,4 +1,5 @@
     <?php
+    
       require('header.php');
       require('db.php');
       session_start();
@@ -25,16 +26,23 @@
 
         $rows = mysqli_num_rows($result);
         if($rows == 1) {
-          $_SESSION['userid'] = $userid;
           if($fname == 0){
-          header("Location:index.php");
+            $_SESSION['userid'] = $userid;
+
+                 header("Location:index.php");
           }
-          else { header("Location:admin.php");}
+          else { 
+            $_SESSION['admin'] = $userid;
+
+            header("Location:admin.php");}
         }
         else {
-            echo "<div class='form'>
-            <h3>Username/password is incorrect.</h3>
-            <br/>Click here to <a href='login.php'>Login</a></div>";
+            // echo "<div class='form'>
+            // <h3>Username/password is incorrect.</h3>
+            // <br/>Click here to <a href='login.php'>Login</a></div>";
+            echo '<script>alert("Incorrect Login details."); history.go(-1);</script>'; 
+
+
         }
 
 

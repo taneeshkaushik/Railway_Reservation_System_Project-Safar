@@ -26,9 +26,9 @@ include("auth.php");
       <a class="navbar-brand" href="#">RailWay</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Check PNR</a></li>
+      <!-- <li class="active"><a href="#">Check PNR</a></li> -->
 
-      <li><a href="#">Your Bookings</a></li>
+      <li><a href="booking_history.php">Your Bookings</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $_SESSION['userid']; ?></a> </li>
@@ -48,6 +48,23 @@ include("auth.php");
 
 <?php
 require('db.php');
+$today = date('Y-m-d');
+$q1 = "SELECT * from `trains_running` where journey_date < '$today';";
+$res = mysqli_query($con , $q1);
+
+if(mysqli_num_rows($res) > 0 )
+{
+  
+ while($row = mysqli_fetch_assoc($res)){
+   $q2 = "DROP table `".$row['train_id']."_".$row['journey_date']."_booked` ;";
+   $r = mysqli_query($con , $q2);
+ }
+
+$query1  = "DELETE from `trains_running` where journey_date < '$today'; ";
+$re = mysqli_query($con , $query1);
+}
+
+
 //session_start();
 if(isset($_POST['train_no'])){
 
@@ -67,27 +84,6 @@ if(isset($_POST['train_no'])){
  $_SESSION["train_id"] = $train_no;
  $_SESSION["date"] = $date;
 
-//  $gender = $_REQUEST['gender'];
-
-//  $coachType = $_REQUEST['coach_type'];
-
-//  foreach ($name as $v){
-//   echo $v;
-
-//  }
-//  foreach ($age as $v){
-//         echo $v;
-      
-//        } 
-// foreach ($gender as $v){
-//         echo $v;      
-//        }
-//  echo $train_no . $date . $coachType ;
-
-
-// Writing of database part will be done here
- 
-//  echo $train_no . $date;
 
 $query = "select * from `trains_running` where train_id = '$train_no' and journey_date = '$date';";
 $result = mysqli_query($con,$query) or die(mysql_error());
@@ -100,7 +96,9 @@ if(mysqli_num_rows($result) >0){
   header("Location:crousal.php");
 }
 else{
-  echo "Train not available";
+  // echo "Train not available";
+  echo '<script>alert("Train Not Available."); history.go(-1);</script>'; 
+
 }
 
 }
@@ -137,7 +135,7 @@ else{
           </div>
           <div class="form-group">
             <label for="journey_date" class="col-form-label"> Journey Date:</label>
-            <input type="date" class="form-control" name="journey_date" required="true">
+            <input type="date" min="<?php  echo date('Y-m-d'); ?>" class="form-control" name="journey_date" required="true">
           </div>
           <!-- <div class="form-group-inline">
 
