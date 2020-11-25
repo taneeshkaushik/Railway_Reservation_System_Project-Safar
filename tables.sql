@@ -55,9 +55,11 @@ create table booker
 
 create table (booker_name)_ticket_table
 (
-    pnr int, 
+    pnr int , 
     train_id int,
     ticket_date date,
+    coach_num int, 
+    seat_num,int
     primary key(pnr),
     foreign key(train_id) references trains(train_id)
 );

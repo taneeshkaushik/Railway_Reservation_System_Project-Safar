@@ -118,14 +118,8 @@ if (isset($_REQUEST['journey_date'])){
   $res3= mysqli_query($con, $creating_ticket_table_for_each_train);
   
 
-<<<<<<< HEAD
-  if($result1 and   $result2 and $res3 )
-  {
-    
-=======
   if($result1 and   $result2 and $res3 ){
   
->>>>>>> b118693f4da26439a468071f65d4fd01ef44afe5
   header("Location: admin.php");
   
   }
