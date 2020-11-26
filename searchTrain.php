@@ -78,35 +78,6 @@ if(isset($_REQUEST['submit']))
       
         }
 
-<<<<<<< HEAD
-   else
-   {
-      $q1 = "select * from `".$train_id."_stations`";
-      $get_all_stations = mysqli_query($con1, $q1);
-    
-      if(mysqli_num_rows($get_all_stations) > 0 )
-      {
-        while($index = mysqli_fetch_assoc($get_all_stations))
-        {
-          $q2 = "select * from `".$index['station_id']."_trains`;";
-          $trains=mysqli($con1, $q2);
-          if(mysqli_num_rows($trains) > 0 )
-          {
-              while($j = mysqli_fetch_assoc($trains))
-              {
-              $t =  $j['train_id'];
-
-              $q3 = " select * from `".$t."_stations`where station_id = $dest_station and arrival_time > {$j['departure_time']};"; 
-              $result11 = mysqli_query($con1 , $q3);
-
-              if(mysqli_num_rows($result11) != 0)
-              {
-                /// get arrival time and start station
-                while($i = mysqli_fetch_assoc($result11))
-                echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
-                
-              }
-=======
   while($row = mysqli_fetch_assoc($start_trains)){
     $train_id = $row['train_id'];
     $dept_time = $row['departure_time'];
@@ -144,7 +115,6 @@ if(isset($_REQUEST['submit']))
 
               
              }
->>>>>>> 1934a4a8646baeabafc4070841ff91da765d0f2b
            }
 
 
@@ -166,6 +136,9 @@ if(isset($_REQUEST['submit']))
   }
 
 }
+  }
+}
+
 
 // $ans;
 // for each $t of result,
@@ -191,7 +164,7 @@ if(isset($_REQUEST['submit']))
 
 
 
-}
+
 else{
 ?>
 
