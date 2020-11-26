@@ -55,6 +55,8 @@ else {
     <li><a href="trainhistory.php">Train History </a></li>
 
     <li><a data-toggle="modal" data-target="#exampleModal"> Add Train </a></li>
+    <li><a href="addRoute.php"> Add Train and Routes </a></li>
+
   
       <!-- <a class="navbar-brand" >Welcome to the Admin Portal</a> -->
     </ul>
@@ -94,7 +96,7 @@ else {
           <th class="text-center"> Add AC Coach </th>
           <th class="text-center"> Release Train</th>
           
-          <th class="text-center"> Add Route</th>     
+          <!-- <th class="text-center"> Add Route</th>      -->
         </tr>
 
        <?php
@@ -114,19 +116,21 @@ else {
          <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
          <td><button class="btn btn-primary" type="submit" > Release </button>   </td>
          </form>
-
+<!-- 
          <?php 
-         if(isset($_REQUEST["addroute"])){
-           $_SESSION['train_no'] = $_REQUEST['train'];
-           header("Location:addRoute.php");
-         }
-         else{
+        //  if(isset($_REQUEST["addroute"])){
+        //    $_SESSION['train_no'] = $_REQUEST['train'];
+        //    header("Location:addRoute.php");
+        //  }
+        //  else{
          ?>
          <form method="post">
-         <input type="hidden" required="True" name ="train" value = <?php echo $row["train_id"]; ?> >  </input>
+         <input type="hidden" required="True" name ="train" value = <?php // echo $row["train_id"]; ?> >  </input>
          <td><button class="btn btn-warning" type="submit" name="addroute" > Add </button>   </td>
          </form>
-        <?php } ?>
+        <?php 
+      // }
+       ?> -->
 
         </tr>
          <?php
@@ -220,6 +224,32 @@ if (isset($_REQUEST['journey_date'])){
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+          <form action="" method="post">
+           Enter High Security Key <input type="password" name="key"><br>
+        <hr>
+        <input name="submit" type="submit" class="btn btn-primary"> </input>
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
 
 <?php } ?>
 

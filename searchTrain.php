@@ -63,7 +63,7 @@ if(mysqli_num_rows($start_trains) > 0 ){
   while($row = mysqli_fetch_assoc($start_trains)){
     $train_id = $row['train_id'];
     $dept_time = $row['departure_time'];
-   $q =  "select * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > $dept_time;";
+   $q =  "select * from `".$train_id."_stations` where station_id = '$dest_station' and arrival_time > '$dept_time';";
    $res = mysqli_query($con1 , $res);
    if(mysqli_num_rows($res) != 0)
    {
@@ -74,7 +74,7 @@ if(mysqli_num_rows($start_trains) > 0 ){
     
    }
    else{
-    $q1 = "select * from `".$train_id."_stations`";
+    $q1 = "select * from `".$train_id."_stations`;";
     $get_all_stations = mysqli_query($con1, $q1);
     
     if(mysqli_num_rows($get_all_stations) > 0 ){
@@ -85,7 +85,7 @@ if(mysqli_num_rows($start_trains) > 0 ){
         if(mysqli_num_rows($trains) > 0 ){
           while($j = mysqli_fetch_assoc($trains)){
              $t =  $j['train_id'];
-             $q3 = " select * from `".$t."_stations` where station_id = $dest_station and arrival_time > $j['departure_time']    ;"; 
+             $q3 = "SELECT * from `".$t."_stations` where station_id = $dest_station and arrival_time > {$j['departure_time']};"; 
              $result11 = mysqli_query($con1 , $q3);
 
              if(mysqli_num_rows($result11) != 0)
