@@ -50,13 +50,13 @@ if(isset($_REQUEST['submit']))
 {
 $start_station = $_REQUEST['source'];
 $dest_station = $_REQUEST['dest'];
-$date = $_REQUEST['traveldate'];
+// $date = $_REQUEST['traveldate'];
 
 // echo $start_station . $dest_station .$date;
 
 
 $q="select * from `".$start_station."_trains`";
-$start_trains=mysqli($con,$q);
+$start_trains=mysqli_query($con,$q);
 
 if(mysqli_num_rows($start_trains) > 0 ){
 
@@ -64,10 +64,13 @@ if(mysqli_num_rows($start_trains) > 0 ){
     $train_id = $row['train_id'];
     $dept_time = $row['departure_time'];
    $q =  "select * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > $dept_time;";
-   $res = mysqli_query($res);
+   $res = mysqli_query($con1 , $res);
    if(mysqli_num_rows($res) != 0)
    {
      /// get arrival time and start station   
+     while($inrow = mysqli_fetch_assoc($res)){
+       echo " Train No" .$train_id .": Source Station=> ".$start_station." Departure time: ". $dept_time  ."--- Dest Station=> ".$inrow['station_id'] ." " . $inrow['arrival_time']; 
+     }
     
    }
    else{
@@ -87,15 +90,14 @@ if(mysqli_num_rows($start_trains) > 0 ){
 
              if(mysqli_num_rows($result11) != 0)
              {
-               /// get arrival time and start station   
+               /// get arrival time and start station
+               while($i = mysqli_fetch_assoc($result11))
+               echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
+               
+
               
              }
-
-
-             
-
-          }
-
+           }
         }
       
       }
@@ -153,10 +155,10 @@ Search for Trains     </h2>
       <input type="text" class="form-control" name="dest" placeholder="To*" required="true">
     </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
   <label  class="col-form-label">Choose date of Travel:</label>
     <input type="date" class="form-control" name="traveldate" required="true" >
-  </div>
+  </div> -->
 
   <button type="submit" name = "submit" class="btn btn-primary"> Find Trains</button>
 </form>
