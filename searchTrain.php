@@ -162,6 +162,12 @@ if(isset($_REQUEST['submit']))
 
             
         }
+        // pehle train 1 - ka data $row mein hain , source, station a hain souce station, 
+       // intermediate-- train - $j and station $index mein hain 
+       // $result11 se nikaal le statoin b ka data. 
+      //  last station pe sirf arrival time likha na
+
+
 
       }
 
