@@ -9,7 +9,7 @@
     $stat_id
     $stat_name
 
-    $q="insert into `trains`(`id`) values(`$train_num`);";
+    $q="insert into `trains`(`id`) values('$train_num');";
 
     $q2 ="create table train_num_stations(
         count int auto_increment not null, 

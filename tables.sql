@@ -119,9 +119,9 @@ create table trains
 (
     id int Not null , 
     primary key (id)
-)
+);
 
-create table train_name_stations
+create table train_id_stations
 (
     
     station_id int  not null, 

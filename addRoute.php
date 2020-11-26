@@ -1,9 +1,38 @@
 <?php
 //include auth.php file on all secure pages
 include("admin_auth.php");
-require('db.php');
+require('db1.php');
 
-echo $_SESSION['train_no'];
+
+
+$train_num =  $_SESSION['train_no'];
+echo $train_num;
+// $search = "select * from `trains` where id = '$train_num'";
+// $result = mysqli_query($con1 , $search);
+// if(mysqli_num_rows($result) == 0){
+
+$q="insert into `trains`(`id`) values('$train_num');";
+$res1 = mysqli_query($con1 , $q);
+
+if($res1){
+$q1 ="create table `".$train_num."_stations`
+(
+    
+    station_id int  not null, 
+    arrival_time time not null, 
+    departure_time time , 
+    primary key(station_id , arrival_time , departure_time),
+    foreign key(station_id) references stations(id)
+
+);";
+$res2 = mysqli_query($con1 , $q1);
+
+
+
+}
+
+
+
 ?>
 
 
@@ -33,8 +62,48 @@ echo $_SESSION['train_no'];
     </ul>
   </div>
 </nav>
+<?php 
+
+if(isset($_REQUEST["submit"])){
+ $stationName = $_REQUEST['name'];
+ $stationId = $_REQUEST['stationid'];
+ $arr =$_REQUEST['arrival'];
+ $dep = $_REQUEST['dept'];
+
+ for ($x =0 ; $x < count($stationId) ; $x++ ){
+  $query = "select * from `stations` where id = '$stationId[$x]';";
+  $r  = mysqli_query($con1 , $query);
+  if(mysqli_num_rows($r) == 0)
+  {
+    $query1 = "INSERT into `stations` (`id` , `name`) values ('$stationId[$x]' , '$stationName[$x]');";
+    $r1 = mysqli_query($con1 , $query1);
+    $query2 = "CREATE table `".$stationId[$x]."_trains`
+    (
+        train_id int not null, 
+        arrival_time time not null, 
+        departure_time time,
+        primary key(train_id, arrival_time), 
+        foreign key(train_id) references trains(id)
+    
+    );";
+    // echo $query2;
+    $r2 = mysqli_query($con1 , $query2);
+   
+
+  }
+
+  $query3 = "INSERT into `".$stationId[$x]."_trains` (`train_id`, `arrival_time`, `departure_time`)  values ('$train_num', '$arr[$x]' , '$dep[$x]');";
+  $r3= mysqli_query($con1,$query3);
 
 
+ }
+
+ echo '<script>alert("Operation Successful!!!"); history.go(-2);</script>'; 
+
+
+}
+else{
+?>
 <div class="container well">
 <h2 class="text-center"> Assign Routes </h2>
 <form  class="form-horizontal">
@@ -99,6 +168,7 @@ var c = 1;
 
 </script>
 
+<?php } ?>
 </body>
 </html>
 

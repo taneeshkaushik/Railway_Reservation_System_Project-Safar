@@ -117,12 +117,13 @@ else {
 
          <?php 
          if(isset($_REQUEST["addroute"])){
-           $_SESSION['train_no'] = $row["train_id"];
+           $_SESSION['train_no'] = $_REQUEST['train'];
            header("Location:addRoute.php");
          }
          else{
          ?>
          <form method="post">
+         <input type="hidden" required="True" name ="train" value = <?php echo $row["train_id"]; ?> >  </input>
          <td><button class="btn btn-warning" type="submit" name="addroute" > Add </button>   </td>
          </form>
         <?php } ?>
