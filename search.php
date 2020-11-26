@@ -1,14 +1,11 @@
 
-
-
-
-
 <php?
 
     $train_num
     $stat_id
     $stat_name
 
+    
     $q="insert into `trains`(`id`) values(`$train_num`);";
 
     $q2 ="create table train_num_stations(
@@ -19,7 +16,6 @@
         primary key(count),
         foreign key(station_id) references stations(id)
     )"    
-
 
     $res= mysqli($con,$q);
 

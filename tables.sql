@@ -121,13 +121,13 @@ create table trains
     primary key (id)
 )
 
-create table train_name_stations
+create table 'train_id'_stations
 (
     
     station_id int  not null, 
     arrival_time time not null, 
     departure_time time , 
-    primary key(count),
+    primary key(station_id, arrival_time, departure_time),
     foreign key(station_id) references stations(id)
 
 )
