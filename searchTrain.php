@@ -43,7 +43,7 @@ include("db1.php");
 
 <header >
  <h2 class="text-center">
-  Welcome to Search Portal
+  Welcome to Search Portal, Hello
  </h2>
 </header>
 
