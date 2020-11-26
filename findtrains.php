@@ -2,10 +2,13 @@
 
 
 
-    $ a
+    $ stat_a;
 
-    $q="select * from a_trains";
+    $ stat_b;
+
+    $q="select * from stat_a_trains";
     result=mysqli($con,$q);
+
     $ans;
     for each $t of result,
         $q= "select station_id from $t_stations where station_id==$b"
@@ -15,14 +18,15 @@
             continue;
 
         else
-        
+
             $q="select  from $t_stations "
             $res=mysqli($con, $q)
             sort($res)
-            for each station in $res
-                from $stat_train
-
-
+            for each station $s in $res
+                
+                $q=select * from $s_trains
+                $res=mysqli($con, $q);
+                
 
 
 
