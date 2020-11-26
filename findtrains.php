@@ -25,8 +25,13 @@
             for each station $s in $res
                 
                 $q=select * from $s_trains
-                $res=mysqli($con, $q);
-                
+                $trains=mysqli($con, $q);
+                for each train in $trains
+                    select station_id, arrival_time
+                    from train_stations
+                    where station_id=$stat_b and arrival_time > $arrival on that station,
+
+
 
 
 
