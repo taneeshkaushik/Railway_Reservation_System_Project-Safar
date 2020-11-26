@@ -1,6 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
+include("db1.php");
 ?>
 
 
@@ -44,6 +45,23 @@ include("auth.php");
  </h2>
 </header>
 
+<?php 
+if(isset($_REQUEST['submit']))
+{
+$start_station = $_REQUEST['source'];
+$dest_station = $_REQUEST['dest'];
+$date = $_REQUEST['traveldate'];
+
+// echo $start_station . $dest_station .$date;
+
+
+
+
+
+}
+else{
+?>
+
 
 <div class="container well"> 
      <form>
@@ -52,23 +70,23 @@ Search for Trains     </h2>
      <hr>
     <div class="form-group">
     <label  class="col-form-label"> Starting Station:</label>
-      <input type="text" class="form-control" id="source" placeholder="From*" required="true">
+      <input type="text" class="form-control" name="source" placeholder="From*" required="true">
     </div>
     
     <div class="form-group">
     <label  class="col-form-label">End Station:</label>
-      <input type="text" class="form-control" id="dest" placeholder="To*" required="true">
+      <input type="text" class="form-control" name="dest" placeholder="To*" required="true">
     </div>
 
   <div class="form-group">
   <label  class="col-form-label">Choose date of Travel:</label>
-    <input type="date" class="form-control" id="traveldate" required="true" >
+    <input type="date" class="form-control" name="traveldate" required="true" >
   </div>
 
-  <button type="submit" class="btn btn-primary"> Find Trains</button>
+  <button type="submit" name = "submit" class="btn btn-primary"> Find Trains</button>
 </form>
 </div>
 
-
+<?php } ?>
 </body>
 </html>
