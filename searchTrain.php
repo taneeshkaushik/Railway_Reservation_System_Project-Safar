@@ -78,9 +78,13 @@ if(isset($_REQUEST['submit']))
       
         }
 
+<<<<<<< HEAD
 
   while($row = mysqli_fetch_assoc($start_trains))
   {
+=======
+  while($row = mysqli_fetch_assoc($start_trains)){
+>>>>>>> a49f9c0d05ed52ce3b1b534d5ca5f490beed0c9b
     $train_id = $row['train_id'];
     $dept_time = $row['departure_time'];
    $q =  "select * from `".$train_id."_stations` where station_id = '$dest_station' and arrival_time > '$dept_time';";
@@ -138,14 +142,20 @@ if(isset($_REQUEST['submit']))
   }
 
 }
+  }
+}
 
 
 
 
 
+
+<<<<<<< HEAD
 }
 
 }
+=======
+>>>>>>> a49f9c0d05ed52ce3b1b534d5ca5f490beed0c9b
 else{
 ?>
 
