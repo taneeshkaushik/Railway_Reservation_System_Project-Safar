@@ -155,7 +155,6 @@ if (isset($_REQUEST['journey_date'])){
     FOREIGN key(booker_username) references booker(username)
   );";
 
-  
   $result1 = mysqli_query($con,$query2);
   $result2 = mysqli_query($con,$query1);
   $res3= mysqli_query($con, $creating_ticket_table_for_each_train);

@@ -55,16 +55,18 @@ create table booker
 
 create table (booker_name)_ticket_table
 (
-    pnr int, 
+    pnr int , 
     train_id int,
     ticket_date date,
+    coach_num int, 
+    seat_num,int
     primary key(pnr),
     foreign key(train_id) references trains(train_id)
 );
 
 create table (booker_name)_passengers
 (
-    id INT AUTO_INCREMENT,
+    aadhar INT NOT NULL,
     name text,
     age int,
     sex TINYINT,
@@ -108,3 +110,42 @@ create table `sensitive_info` (
     become_admin varchar(255) not null;
     high_security_key(255) not null;
 );
+
+
+
+tables for phase -2
+
+create table trains
+(
+    id int Not null , 
+    primary key (id)
+)
+
+create table train_name_stations
+(
+    
+    station_id int  not null, 
+    arrival_time time not null, 
+    departure_time time , 
+    primary key(count),
+    foreign key(station_id) references stations(id)
+
+)
+
+create table stations
+(
+    id int not null, 
+    name varchar(255) ,
+    primary key(id)
+
+)
+
+create table station_id_trains
+(
+    train_id int not null, 
+    arrival_time time not null, 
+    departure_time time
+    primary key(train_id, arrival_time), 
+    foreign key(train_id) references trains(id)
+
+)
