@@ -3,36 +3,6 @@
 include("admin_auth.php");
 require('db1.php');
 
-
-
-$train_num =  $_SESSION['train_no'];
-echo $train_num;
-// $search = "select * from `trains` where id = '$train_num'";
-// $result = mysqli_query($con1 , $search);
-// if(mysqli_num_rows($result) == 0){
-
-$q="insert into `trains`(`id`) values('$train_num');";
-$res1 = mysqli_query($con1 , $q);
-
-if($res1){
-$q1 ="create table `".$train_num."_stations`
-(
-    
-    station_id int  not null, 
-    arrival_time time not null, 
-    departure_time time , 
-    primary key(station_id , arrival_time , departure_time),
-    foreign key(station_id) references stations(id)
-
-);";
-$res2 = mysqli_query($con1 , $q1);
-
-
-
-}
-
-
-
 ?>
 
 
@@ -65,6 +35,30 @@ $res2 = mysqli_query($con1 , $q1);
 <?php 
 
 if(isset($_REQUEST["submit"])){
+
+
+
+  $train_num =  $_REQUEST['train_no'];
+  // echo $train_num;
+  
+  $q="insert into `trains`(`id`) values('$train_num');";
+  $res1 = mysqli_query($con1 , $q);
+  
+  if($res1){
+  $q1 ="create table `".$train_num."_stations`
+  (
+      
+      station_id int  not null, 
+      arrival_time time not null, 
+      departure_time time , 
+      primary key(station_id , arrival_time , departure_time),
+      foreign key(station_id) references stations(id)
+  
+  );";
+  $res2 = mysqli_query($con1 , $q1);
+  
+  }
+
  $stationName = $_REQUEST['name'];
  $stationId = $_REQUEST['stationid'];
  $arr =$_REQUEST['arrival'];
@@ -102,7 +96,7 @@ if(isset($_REQUEST["submit"])){
 
  }
 
- echo '<script>alert("Operation Successful!!!"); history.go(-2);</script>'; 
+ echo '<script>alert("Operation Successful!!!"); history.go(-1);</script>'; 
 
 
 }
@@ -110,7 +104,16 @@ else{
 ?>
 <div class="container well">
 <h2 class="text-center"> Assign Routes </h2>
+<hr>
 <form  class="form-horizontal">
+
+<div class="form-group row">
+  <div class="col-sm-2">
+  <label >Enter Train Number:</label>
+  </div>
+  <div class="col-sm-10"> 
+  <input type="text" class="form-control " placeholder="enter train number" name="train_no"  required="true">  </div>
+</div>
     <div id ="station-form">
      <div class="form-group row">
            <div class="col-sm-3"> <label> Station Id </label><input  class="form-control" type="text" name="stationid[]" placeholder="Station Id" required="True"  >  </div>
@@ -126,12 +129,18 @@ else{
              <label >Departure Time</label>
              <input  class="form-control" type="time" name="dept[]"  placeholder="Departure time" required="True">
            </div>
+
+
+    
     </div>
+    
 
     </div>
 
           <div class="form-group row" >
+        
           <a onclick="addStation()">+Add Station</a>
+        
           </div> 
 
 
