@@ -7,6 +7,8 @@
 
     $q="insert into `trains`(`id`) values('$train_num');";
 
+
+
     $q2 ="create table train_num_stations(
         count int auto_increment not null, 
         station_id int  not null, 
@@ -18,7 +20,7 @@
 
     $res= mysqli($con,$q);
 
-
+        
 
     $q= "select `station_id` from `stations` where station_id = `$stat_id`;";
     $res2= mysqli(con,$q);
@@ -41,6 +43,10 @@
     $q4="insert into stat_num_trains(train_id, arrival_time, dept_time)";
     $res3= mysqli($con,$q);
 
+
+    for all stations
+        insert into train_id_stations values()
+    
 
     $a, $b
     

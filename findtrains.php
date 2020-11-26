@@ -1,11 +1,7 @@
 <php?
 
-
-
     $ stat_a;
-
     $ stat_b;
-
     $q="select * from stat_a_trains";
     result=mysqli($con,$q);
 
@@ -30,13 +26,5 @@
                     select station_id, arrival_time
                     from train_stations
                     where station_id=$stat_b and arrival_time > $arrival on that station,
-
-
-
-
-
-
-
-
 
 ?>

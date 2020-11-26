@@ -2,6 +2,8 @@
 //include auth.php file on all secure pages
 include("auth.php");
 include("db1.php");
+
+
 ?>
 
 
@@ -48,59 +50,73 @@ include("db1.php");
 <?php 
 if(isset($_REQUEST['submit']))
 {
-$start_station = $_REQUEST['source'];
-$dest_station = $_REQUEST['dest'];
+  $start_station = $_REQUEST['source'];
+  $dest_station = $_REQUEST['dest'];
 // $date = $_REQUEST['traveldate'];
 
 // echo $start_station . $dest_station .$date;
 
+  $q = "select * from `".$start_station."_trains`";
+  $start_trains = mysqli_query($con1,$q);
 
-$q="select * from `".$start_station."_trains`";
-$start_trains=mysqli_query($con,$q);
-
-if(mysqli_num_rows($start_trains) > 0 ){
-
-  while($row = mysqli_fetch_assoc($start_trains)){
-    $train_id = $row['train_id'];
-    $dept_time = $row['departure_time'];
-   $q =  "select * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > $dept_time;";
-   $res = mysqli_query($con1 , $res);
-   if(mysqli_num_rows($res) != 0)
-   {
-     /// get arrival time and start station   
-     while($inrow = mysqli_fetch_assoc($res)){
-       echo " Train No" .$train_id .": Source Station=> ".$start_station." Departure time: ". $dept_time  ."--- Dest Station=> ".$inrow['station_id'] ." " . $inrow['arrival_time']; 
-     }
+  if(mysqli_num_rows($start_trains)>0)
+  {
     
-   }
-   else{
-    $q1 = "select * from `".$train_id."_stations`";
-    $get_all_stations = mysqli_query($con1, $q1);
-    
-    if(mysqli_num_rows($get_all_stations) > 0 ){
-      while($index = mysqli_fetch_assoc($get_all_stations)){
-        
-        $q2 = "select * from `".$index['station_id']."_trains`;";
-        $trains=mysqli($con1, $q2);
-        if(mysqli_num_rows($trains) > 0 ){
-          while($j = mysqli_fetch_assoc($trains)){
-             $t =  $j['train_id'];
-             $q3 = " select * from `".$t."_stations` where station_id = $dest_station and arrival_time > $j['departure_time']    ;"; 
-             $result11 = mysqli_query($con1 , $q3);
-
-             if(mysqli_num_rows($result11) != 0)
-             {
-               /// get arrival time and start station
-               while($i = mysqli_fetch_assoc($result11))
-               echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
-               
-
-              
-             }
-           }
+    while($row = mysqli_fetch_assoc($start_trains))
+    {
+        $train_id = $row['train_id'];
+        $dept_time = $row['departure_time'];
+        $q =  "SELECT * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > $dept_time;";
+        $res = mysqli_query($con1 , $res);
+        if(mysqli_num_rows($res) != 0)
+        {
+            /// get arrival time and start station   
+            while($inrow = mysqli_fetch_assoc($res))
+            {
+              echo " Train No" .$train_id .": Source Station=> ".$start_station." Departure time: ". $dept_time  ."--- Dest Station=> ".$inrow['station_id'] ." " . $inrow['arrival_time']; 
+            }
+      
         }
+
+   else
+   {
+      $q1 = "select * from `".$train_id."_stations`";
+      $get_all_stations = mysqli_query($con1, $q1);
+    
+      if(mysqli_num_rows($get_all_stations) > 0 )
+      {
+        while($index = mysqli_fetch_assoc($get_all_stations))
+        {
+          $q2 = "select * from `".$index['station_id']."_trains`;";
+          $trains=mysqli($con1, $q2);
+          if(mysqli_num_rows($trains) > 0 )
+          {
+              while($j = mysqli_fetch_assoc($trains))
+              {
+              $t =  $j['train_id'];
+
+              $q3 = " select * from `".$t."_stations`where station_id = $dest_station and arrival_time > {$j['departure_time']};"; 
+              $result11 = mysqli_query($con1 , $q3);
+
+              if(mysqli_num_rows($result11) != 0)
+              {
+                /// get arrival time and start station
+                while($i = mysqli_fetch_assoc($result11))
+                echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
+                
+              }
+           }
+
+
+
+        }
+
+
       
       }
+
+
+
     }
 
 

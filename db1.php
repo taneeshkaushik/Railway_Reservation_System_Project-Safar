@@ -1,7 +1,7 @@
 <?php
 // Enter your Host, username, password, database below.
 // I left password empty because i do not set password on localhost.
-$con1 = mysqli_connect("localhost","root","","railways");
+$con1 = mysqli_connect("localhost","root","","Path");
 // Check connection
 if (mysqli_connect_errno())
   {
