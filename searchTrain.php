@@ -56,35 +56,80 @@ $date = $_REQUEST['traveldate'];
 
 
 $q="select * from `".$start_station."_trains`";
-$result=mysqli($con,$q);
+$start_trains=mysqli($con,$q);
 
-if(mysqli_num_rows($result) > 0 ){
+if(mysqli_num_rows($start_trains) > 0 ){
 
-  while($row = mysqli_fetch_assoc($result)){
-   $q =  "select "
+  while($row = mysqli_fetch_assoc($start_trains)){
+    $train_id = $row['train_id'];
+    $dept_time = $row['departure_time'];
+   $q =  "select * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > $dept_time;";
+   $res = mysqli_query($res);
+   if(mysqli_num_rows($res) != 0)
+   {
+     /// get arrival time and start station   
+    
+   }
+   else{
+    $q1 = "select * from `".$train_id."_stations`";
+    $get_all_stations = mysqli_query($con1, $q1);
+    
+    if(mysqli_num_rows($get_all_stations) > 0 ){
+      while($index = mysqli_fetch_assoc($get_all_stations)){
+        
+        $q2 = "select * from `".$index['station_id']."_trains`;";
+        $trains=mysqli($con1, $q2);
+        if(mysqli_num_rows($trains) > 0 ){
+          while($j = mysqli_fetch_assoc($trains)){
+             $t =  $j['train_id'];
+             $q3 = " select * from `".$t."_stations` where station_id = $dest_station and arrival_time > $j['departure_time']    ;"; 
+             $result11 = mysqli_query($con1 , $q3);
+
+             if(mysqli_num_rows($result11) != 0)
+             {
+               /// get arrival time and start station   
+              
+             }
+
+
+             
+
+          }
+
+        }
+      
+      }
+    }
+
+
+
+   }
 
   }
 
 }
 
-for each $t of result,
-    $q= "select station_id from $t_stations where station_id==$b"
-    $res=mysqli($con, $q);
-    if(sizeof($res)!=0)
-        ans.add(train,arrival-time, departure time, arrival time at b, departure at b)
-        continue;
+// $ans;
+// for each $t of result,
+//     $q= "select station_id from $t_stations where station_id==$b"
+//     $res=mysqli($con, $q);
+//     if(sizeof($res)!=0)
+//         ans.add(train,arrival-time, departure time,  x,   arrival time at b, departure at b)
+//         continue;
 
-    else
+//     else
 
-        $q="select  from $t_stations "
-        $res=mysqli($con, $q)
-        sort($res)
-        for each station $s in $res
+//         $q="select  from $t_stations "
+//         $res=mysqli($con, $q)
+//         sort($res)
+//         for each station $s in $res
             
-            $q=select * from $s_trains
-            $res=mysqli($con, $q);
-            
-
+//             $q=select * from $s_trains
+//             $trains=mysqli($con, $q);
+//             for each train in $trains
+//                 select station_id, arrival_time
+//                 from train_stations
+//                 where station_id=$stat_b and arrival_time > $arrival on that station,
 
 
 
