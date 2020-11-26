@@ -143,7 +143,7 @@ if(isset($_REQUEST['submit']))
                             <td class="text-center"><?php echo $row['arrival_time'];    ?> </td>
                             <td class="text-center"><?php echo $dept_time;    ?> </td>
 
-                            <td class="text-center"><?php echo $t;    ?>  </td>
+                            <td class="text-center"><?php echo $index['station_id'] ." --- ".$t;    ?>  </td>
                             <td class="text-center"><?php echo $j['arrival_time'] ;  ?> </td>
                             <td class="text-center"><?php echo $j['departure_time'] ;   ?> </td>
 
@@ -151,7 +151,7 @@ if(isset($_REQUEST['submit']))
                           </tr>
                           <?php
                         }
-
+                        
 
                         }
                 }
