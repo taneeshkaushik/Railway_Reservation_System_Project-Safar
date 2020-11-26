@@ -43,13 +43,28 @@ include("db1.php");
 
 <header >
  <h2 class="text-center">
-  Welcome to Search Portal, Hello
+  Welcome to Search Portal
  </h2>
 </header>
 
 <?php 
 if(isset($_REQUEST['submit']))
 {
+  ?>
+  <table class="table ">
+  <tr>
+    <th class="text-center"> Train Number  </th>
+    <th class="text-center"> Source Station  </th>
+    <th class="text-center"> Dept Source </th>
+    <th class="text-center"> Intermediate Station </th>
+    <th class="text-center">Arrival Inter </th>
+    <th class="text-center">Dept Inter </th>
+    
+    <th class="text-center"> Destination Station </th>
+    <th class="text-center">Arrival Dest </th>
+    
+<?php
+
   $start_station = $_REQUEST['source'];
   $dest_station = $_REQUEST['dest'];
 // $date = $_REQUEST['traveldate'];
@@ -76,7 +91,23 @@ if(isset($_REQUEST['submit']))
             /// get arrival time and start station   
             while($inrow = mysqli_fetch_assoc($res))
             {
-              echo " Train No" .$train_id .": Source Station=> ".$start_station." Departure time: ". $dept_time  ."--- Dest Station=> ".$inrow['station_id'] ." " . $inrow['arrival_time']; 
+              // echo " Train No" .$train_id .": Source Station=> ".$start_station." Departure time: ". $dept_time  ."--- Dest Station=> ".$inrow['station_id'] ." " . $inrow['arrival_time']; 
+            ?>
+            
+            <tr>
+               <td class="text-center"><?php echo $train_id    ?> </td>
+               <td class="text-center"><?php echo $start_station    ?> </td>
+               <td class="text-center"><?php echo $dept_time    ?> </td>
+               <td class="text-center">  -- </td>
+               <td class="text-center">  -- </td>
+               <td class="text-center">  -- </td>
+
+               <td class="text-center"><?php echo $inrow['station_id']    ?>   </td>
+               <td class="text-center"><?php echo $inrow['arrival_time']    ?> </td>
+            </tr>
+            <?php
+            
+
             }
       
         }
@@ -104,9 +135,25 @@ if(isset($_REQUEST['submit']))
                         if(mysqli_num_rows($result11) != 0)
                         {
                           /// get arrival time and start station
-                          while($i = mysqli_fetch_assoc($result11))
-                          echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
-                          
+                          while($i = mysqli_fetch_assoc($result11)) {
+                          // echo "Train No ".$train_id.  "Source Station" .$start_station. "Dept Time from Source" .$dept_time. "Intermediate Station" .$t. "Arrival" .$i['arrival_time']. "Dept"  .$i['departure_time']. "Destination Station" .$dest_station. "arrival time". $i['arrival_time'] ;
+                          ?>
+            
+                          <tr>
+                            <td class="text-center"><?php echo $train_id ;   ?> </td>
+                            <td class="text-center"><?php echo $start_station;    ?> </td>
+                            <td class="text-center"><?php echo $dept_time;    ?> </td>
+                            <td class="text-center"><?php echo $i['station_id'];    ?>  </td>
+                            <td class="text-center"><?php echo $j['arrival_time'] ;  ?> </td>
+                            <td class="text-center"><?php echo $j['departure_time'] ;   ?> </td>
+
+                            <td class="text-center"><?php echo $dest_station    ?>   </td>
+                            <td class="text-center"><?php echo $i['arrival_time']    ?> </td>
+                          </tr>
+                          <?php
+                        }
+
+
                         }
                 }
               }
@@ -121,6 +168,12 @@ if(isset($_REQUEST['submit']))
   }
 
 }
+
+?>
+
+</table>
+
+<?php
 
 }
 
