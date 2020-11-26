@@ -95,6 +95,10 @@ if(isset($_REQUEST["submit"])){
   $query3 = "INSERT into `".$stationId[$x]."_trains` (`train_id`, `arrival_time`, `departure_time`)  values ('$train_num', '$arr[$x]' , '$dep[$x]');";
   $r3= mysqli_query($con1,$query3);
 
+  
+  $query4 = "INSERT into `".$train_num."_stations` (`station_id` , `arrival_time` , `departure_time`)  values ('$stationId[$x]' , '$arr[$x]' ,'$dep[$x]');";
+ $r4 = mysqli_query($con1 , $query4);
+
 
  }
 
