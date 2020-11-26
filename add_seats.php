@@ -40,19 +40,6 @@ if(isset($_REQUEST["submit"])){
     // echo $_SESSION['userid'];
 
   ///tables insertion queries begin here 
-<<<<<<< HEAD
-  $q1 = "insert into `".$_SESSION["train_id"]."_".$_SESSION["date"]."_booked` (`coach_num` , `seat_num` ,`booker_username`)
-         values ('$st[0]', '$st[1]' , '$_SESSION['userid']');";
-
-
-
-         
-  $q2 = "insert into `".$_SESSION['userid']."_passengers  ; ";
-
-  $q3 = "insert into `".$_SESSION['userid']."_tic_pas ` (`pnr` , `passenger_id`) values('$pnr' )  ;" ;
-
-  $q4 = "insert into `".$_SESSION['userid']."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ('$pnr' , '$_SESSION['train_id']' , '$_SESSION['date']') ;";
-=======
   $q1 = "INSERT INTO `".$train_id."_".$journey_date."_booked` (`coach_num` , `seat_num` ,`booker_username`) VALUES ($st[0] , $st[1] , '$username' ) ;";
   // echo $q1;
   $res1 = mysqli_query($con , $q1);
@@ -71,7 +58,6 @@ if(isset($_REQUEST["submit"])){
   // // echo $q4;
   $res4 = mysqli_query($con, $q4);
   
->>>>>>> b118693f4da26439a468071f65d4fd01ef44afe5
   
  $x++;
   }
