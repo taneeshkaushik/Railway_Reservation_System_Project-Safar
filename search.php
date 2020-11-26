@@ -5,8 +5,12 @@
     $stat_id
     $stat_name
 
+<<<<<<< HEAD
     
     $q="insert into `trains`(`id`) values(`$train_num`);";
+=======
+    $q="insert into `trains`(`id`) values('$train_num');";
+>>>>>>> ebd6e620b6b15a94b55c11f33be990119aed6042
 
     $q2 ="create table train_num_stations(
         count int auto_increment not null, 

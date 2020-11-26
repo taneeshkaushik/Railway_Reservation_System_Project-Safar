@@ -119,9 +119,13 @@ create table trains
 (
     id int Not null , 
     primary key (id)
-)
+);
 
+<<<<<<< HEAD
 create table 'train_id'_stations
+=======
+create table train_id_stations
+>>>>>>> ebd6e620b6b15a94b55c11f33be990119aed6042
 (
     
     station_id int  not null, 
