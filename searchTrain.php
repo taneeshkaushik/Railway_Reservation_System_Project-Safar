@@ -55,6 +55,36 @@ $date = $_REQUEST['traveldate'];
 // echo $start_station . $dest_station .$date;
 
 
+$q="select * from `".$start_station."_trains`";
+$result=mysqli($con,$q);
+
+if(mysqli_num_rows($result) > 0 ){
+
+  while($row = mysqli_fetch_assoc($result)){
+   $q =  "select "
+
+  }
+
+}
+
+for each $t of result,
+    $q= "select station_id from $t_stations where station_id==$b"
+    $res=mysqli($con, $q);
+    if(sizeof($res)!=0)
+        ans.add(train,arrival-time, departure time, arrival time at b, departure at b)
+        continue;
+
+    else
+
+        $q="select  from $t_stations "
+        $res=mysqli($con, $q)
+        sort($res)
+        for each station $s in $res
+            
+            $q=select * from $s_trains
+            $res=mysqli($con, $q);
+            
+
 
 
 
