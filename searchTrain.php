@@ -54,14 +54,13 @@ if(isset($_REQUEST['submit']))
   <table class="table ">
   <tr>
     <th class="text-center"> Train Number  </th>
-    <th class="text-center"> Source Station  </th>
-    <th class="text-center"> Dept Source </th>
-    <th class="text-center"> Intermediate Station </th>
-    <th class="text-center">Arrival Inter </th>
-    <th class="text-center">Dept Inter </th>
+    <th class="text-center"> Arrival Time Source  </th>
+    <th class="text-center"> Dept Time Source </th>
+    <th class="text-center"> Intermediate Station Train </th>
+    <th class="text-center">Arrival Time Intermediate </th>
+    <th class="text-center">Dept Time Intermediate </th>
     
-    <th class="text-center"> Destination Station </th>
-    <th class="text-center">Arrival Dest </th>
+    <th class="text-center">Arrival Time Destination </th>
     
 <?php
 
@@ -82,6 +81,7 @@ if(isset($_REQUEST['submit']))
       
         $train_id = $row['train_id'];
         $dept_time = $row['departure_time'];
+        
         $q =   "SELECT * from `".$train_id."_stations` where station_id = $dest_station and arrival_time > '$dept_time';";
         $res = mysqli_query($con1 , $q);
         
@@ -96,13 +96,12 @@ if(isset($_REQUEST['submit']))
             
             <tr>
                <td class="text-center"><?php echo $train_id    ?> </td>
-               <td class="text-center"><?php echo $start_station    ?> </td>
+               <td class="text-center"><?php echo $row['arrival_time'];    ?> </td>
                <td class="text-center"><?php echo $dept_time    ?> </td>
-               <td class="text-center">  -- </td>
-               <td class="text-center">  -- </td>
-               <td class="text-center">  -- </td>
+               <td class="text-center">  NA </td>
+               <td class="text-center">  NA </td>
+               <td class="text-center">  NA </td>
 
-               <td class="text-center"><?php echo $inrow['station_id']    ?>   </td>
                <td class="text-center"><?php echo $inrow['arrival_time']    ?> </td>
             </tr>
             <?php
@@ -141,13 +140,13 @@ if(isset($_REQUEST['submit']))
             
                           <tr>
                             <td class="text-center"><?php echo $train_id ;   ?> </td>
-                            <td class="text-center"><?php echo $start_station;    ?> </td>
+                            <td class="text-center"><?php echo $row['arrival_time'];    ?> </td>
                             <td class="text-center"><?php echo $dept_time;    ?> </td>
-                            <td class="text-center"><?php echo $i['station_id'];    ?>  </td>
+
+                            <td class="text-center"><?php echo $t;    ?>  </td>
                             <td class="text-center"><?php echo $j['arrival_time'] ;  ?> </td>
                             <td class="text-center"><?php echo $j['departure_time'] ;   ?> </td>
 
-                            <td class="text-center"><?php echo $dest_station    ?>   </td>
                             <td class="text-center"><?php echo $i['arrival_time']    ?> </td>
                           </tr>
                           <?php
