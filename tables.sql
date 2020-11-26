@@ -138,7 +138,8 @@ create table stations
     name varchar(255) ,
     primary key(id)
 
-)
+);
+
 
 create table station_id_trains
 (

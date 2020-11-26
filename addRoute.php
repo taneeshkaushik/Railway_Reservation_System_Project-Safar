@@ -96,7 +96,7 @@ if(isset($_REQUEST["submit"])){
 
  }
 
- echo '<script>alert("Operation Successful!!!"); history.go(-1);</script>'; 
+ echo '<script>alert("Operation Successful!!!"); history.go(-2);</script>'; 
 
 
 }

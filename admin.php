@@ -147,6 +147,12 @@ if (isset($_REQUEST['journey_date'])){
   //$date=$journey_date->format('Y-m-d');
 
   // echo $train_id . $journey_date .$num_ac .$num_sl;
+  $q = "select  * from `trains_running` where train_id = '$train_id' and journey_date = '$journey_date';";
+  $r  = mysqli_query($con , $q);
+
+  if(mysqli_num_rows($r) == 0 )
+  {
+
   $query2 = "insert into `trains_running` (`train_id`, `journey_date`,`num_sl`,`num_ac`)
    values ('$train_id','$journey_date' , '$num_sl' , '$num_ac');";
   $query1 = "insert into `".$_SESSION['admin']."_trains_added` (`train_id`, `date_added`,`num_sl`,`num_ac`) 
@@ -172,7 +178,15 @@ if (isset($_REQUEST['journey_date'])){
   header("Location: admin.php");
   
   }
-  
+
+}
+
+else
+{
+  header("Location:err.php");
+}
+
+
   // echo  $result1;
   // echo $result2;
  
@@ -188,8 +202,11 @@ if (isset($_REQUEST['journey_date'])){
        else{
          ?>
        <h4> No train available </h4>
+       
         <?php
        }
+         
+
 
     ?>
     

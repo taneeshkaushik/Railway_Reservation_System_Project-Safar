@@ -52,6 +52,10 @@ if(isset($_REQUEST["train_no"])){
 
         header("Location: admin.php");
     }
+    else
+    {
+       header("Location: err.php");
+    }
 
 }
 else{
