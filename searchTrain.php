@@ -78,7 +78,13 @@ if(isset($_REQUEST['submit']))
       
         }
 
+<<<<<<< HEAD
+
+  while($row = mysqli_fetch_assoc($start_trains))
+  {
+=======
   while($row = mysqli_fetch_assoc($start_trains)){
+>>>>>>> a49f9c0d05ed52ce3b1b534d5ca5f490beed0c9b
     $train_id = $row['train_id'];
     $dept_time = $row['departure_time'];
    $q =  "select * from `".$train_id."_stations` where station_id = '$dest_station' and arrival_time > '$dept_time';";
@@ -140,31 +146,16 @@ if(isset($_REQUEST['submit']))
 }
 
 
-// $ans;
-// for each $t of result,
-//     $q= "select station_id from $t_stations where station_id==$b"
-//     $res=mysqli($con, $q);
-//     if(sizeof($res)!=0)
-//         ans.add(train,arrival-time, departure time,  x,   arrival time at b, departure at b)
-//         continue;
-
-//     else
-
-//         $q="select  from $t_stations "
-//         $res=mysqli($con, $q)
-//         sort($res)
-//         for each station $s in $res
-            
-//             $q=select * from $s_trains
-//             $trains=mysqli($con, $q);
-//             for each train in $trains
-//                 select station_id, arrival_time
-//                 from train_stations
-//                 where station_id=$stat_b and arrival_time > $arrival on that station,
 
 
 
 
+<<<<<<< HEAD
+}
+
+}
+=======
+>>>>>>> a49f9c0d05ed52ce3b1b534d5ca5f490beed0c9b
 else{
 ?>
 
