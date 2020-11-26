@@ -94,7 +94,7 @@ else {
           <th class="text-center"> Add AC Coach </th>
           <th class="text-center"> Release Train</th>
           
-          <!-- <th class="text-center"> Add Route</th>      -->
+          <th class="text-center"> Add Route</th>     
         </tr>
 
        <?php
@@ -113,9 +113,20 @@ else {
          <td><input  type="number" min ="0" value="0" required="True" name ="num_sl"> </input> </td>
          <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
          <td><button class="btn btn-primary" type="submit" > Release </button>   </td>
-         <!-- <td><button class="btn btn-warning" href= > Add </button>   </td> -->
+         </form>
 
-        </form>
+         <?php 
+         if(isset($_REQUEST["addroute"])){
+           $_SESSION['train_no'] = $row["train_id"];
+           header("Location:addRoute.php");
+         }
+         else{
+         ?>
+         <form method="post">
+         <td><button class="btn btn-warning" type="submit" name="addroute" > Add </button>   </td>
+         </form>
+        <?php } ?>
+
         </tr>
          <?php
 
