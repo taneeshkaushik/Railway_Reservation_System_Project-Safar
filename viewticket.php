@@ -1,6 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
+include("db.php");
 ?>
 
 
@@ -49,19 +50,28 @@ include("auth.php");
   <?php echo $_SESSION["date"]; ?>
    </h2>
 
+
+   <table class="table">
+
+   <tr>
+     <th class="text-center"> Passenger Name </th>
+
+     <th class="text-center">Aadhar </th>
+     <th  class="text-center">Age </th>
+     <th  class="text-center">Gender </th>
+     <th  class="text-center">Coach Num </th>
+     <th  class="text-center">Seat Num </th>
+     
+   </tr>
+
+
    <?php
 
-// find details, 
-
-// $pnr_given
-
-// $booker, 
-// select aadhar, coach_num, seat_num from booker_tic_pas where pnr=$pnr_given
-
-// for each value fo 
-
-//     select * from booker_passengers where aadhar = $aadhar
-//      show, 
+  // $q = "select * from `trains_running` where train_id = {$_SESSION["train"]};";
+  // $r = mysqli_query($con , $q);
+  
+  // $index  = mysqli_fetch_assoc($r)
+  // $num_sl = $index["num_sl"];  
 
 
     $query = "select aadhar, coach_num , seat_num from `".$_SESSION['userid']."_tic_pas` where pnr =  {$_SESSION["pnr"]} ;";
@@ -76,7 +86,18 @@ include("auth.php");
         if(mysqli_num_rows($res) >  0 )
         {
           $in  = mysqli_fetch_assoc($res);
-            echo $in["name"] ."--- ". $in["aadhar"]. " --- " . $in["age"] ."---".  $in["sex"] ."---" .$row["coach_num"]." --- ".$row["seat_num"];
+            // echo $in["name"] ."--- ". $in["aadhar"]. " --- " . $in["age"] ."---".  $in["sex"] ."---" .$row["coach_num"]." --- ".$row["seat_num"];
+
+            ?>
+          <tr>
+            <td class="text-center"> <?php echo $in["name"]; ?> </td>
+            <td  class="text-center"><?php echo $in["aadhar"]; ?> </td>
+            <td  class="text-center"><?php echo $in["age"]; ?> </td>
+            <td  class="text-center"><?php echo $in["sex"]; ?> </td>
+            <td  class="text-center"><?php echo $row["coach_num"]; ?> </td>
+            <td class="text-center"><?php echo $row["seat_num"]; ?> </td>
+          </tr>
+     <?php
           
         }
 
@@ -87,6 +108,6 @@ include("auth.php");
 
    ?>
 
-
+</table>
 
 </div>
