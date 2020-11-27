@@ -122,7 +122,7 @@ if(isset($_REQUEST['submit']))
             {
               $arrival_time_train_1=$index['arrival_time'];// this is arrival time of train on that station, 
 
-              $q2 = "SELECT * from `".$index['station_id']."_trains` where departure_time > $arrival_time_train_1 ;";
+              $q2 = "SELECT * from `".$index['station_id']."_trains` where departure_time > '$arrival_time_train_1' ;";
               $trains=mysqli_query($con1, $q2);
               if(mysqli_num_rows($trains) > 0 )
               {
