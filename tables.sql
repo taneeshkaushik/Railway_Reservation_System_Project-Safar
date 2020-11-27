@@ -77,6 +77,8 @@ create table (booker_name_)_tic_pas
 (
     pnr int not null,
     passenger_id int not null,
+    coach_num varchar(6) not null, 
+    seat_num int not null, 
     primary key(pnr, passenger_id),
     foreign key(pnr) REFERENCES (booker_name)_ticket_table(pnr), 
     foreign key (passenger_id) REFERENCES (booker_name)_passengers(id)
