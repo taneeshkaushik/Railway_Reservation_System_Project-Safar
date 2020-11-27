@@ -120,15 +120,26 @@ if(isset($_REQUEST['submit']))
         {
             while($index = mysqli_fetch_assoc($get_all_stations))
             {
-              
-              $q2 = "select * from `".$index['station_id']."_trains`;";
+              $arrival_time_train_1=$index['arrival_time'];// this is arrival time of train on that station, 
+
+              $q2 = "SELECT * from `".$index['station_id']."_trains` where departure_time > $arrival_time_train_1 ;";
               $trains=mysqli_query($con1, $q2);
               if(mysqli_num_rows($trains) > 0 )
               {
                 while($j = mysqli_fetch_assoc($trains))
                 {
                         $t =  $j['train_id'];
-                        $q3 = "SELECT * from `".$t."_stations` where station_id = $dest_station and arrival_time > '{$j['departure_time']}';"; 
+                        $q3 = "SELECT * from `".$t."_stations` where station_id = $dest_station  and arrival_time > '{$j['departure_time']}';"; 
+
+                        //$intermediate_station=$index['station_id'];
+
+                        //$time_check=" SELECT * FROM `".$t."_stations`  where station_id=$intermediate_station;";
+                       // $time_check_res= mysqli_query($con1, $time_check);
+
+                      //  arrival_time_first_train= $timechecker[arrival_time] 
+                        
+
+
                         $result11 = mysqli_query($con1 , $q3);
 
                         if(mysqli_num_rows($result11) != 0)
