@@ -51,7 +51,7 @@ include("admin_auth.php");
     <?php
        require('db.php');
        $query = "SELECT * FROM ".$_SESSION['admin']."_trains";
-       $result = mysqli_query($con,$query) or die(mysql_error());
+       $result = mysqli_query($con,$query) or die(mysqli_error($con));
        
        if(mysqli_num_rows($result) >0) {
         ?>
