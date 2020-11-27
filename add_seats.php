@@ -1,81 +1,11 @@
 
+
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
 include("db.php");
-// echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
-
-  //  foreach ($_SESSION["seats"] as $v){
-  //       echo $v."*";      
-  //      }
-
-if(isset($_REQUEST["submit"])){
-
-  $query = "select last_pnr_used from `sensitive_info`;";
-  $result = mysqli_query($con , $query);
-  $r = mysqli_fetch_assoc($result);
-
-
-  $pnr = $r["last_pnr_used"] + 1;
-  // echo $pnr;
-  // echo "dkkdkd";
-  // $index  = $_REQUEST["pass"];
-  $name = $_REQUEST["name"];
-  $age = $_REQUEST["age"];
-  $gender = $_REQUEST["gender"];
-  $seats  = $_SESSION["seats"];
-  $aadhar = $_REQUEST["aadhar"];
-  $x = 0;
-  // echo $seats[$x];
-  $train_id = $_SESSION["train_id"];
-  $journey_date = $_SESSION["date"];
-  $username = $_SESSION['userid'];
-  $q2 = "INSERT into `".$username."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ($pnr , $train_id , '$journey_date' ) ;";
-  // echo $q2;
-  $res2  = mysqli_query($con , $q2);
-
-  while($x < count($name)){
-    $st = explode("_", $seats[$x]);
-    // echo $st[0]."**".$st[1];
-    // echo $_SESSION['userid'];
-
-  ///tables insertion queries begin here 
-  $q1 = "INSERT INTO `".$train_id."_".$journey_date."_booked` (`coach_num` , `seat_num` ,`booker_username`) VALUES ($st[0] , $st[1] , '$username' ) ;";
-  // echo $q1;
-  $res1 = mysqli_query($con , $q1);
-        
-
-  $search_query = "SELECT * from `".$username."_passengers` where aadhar = $aadhar[$x]; ";
-  // echo $search_query;
-  $res = mysqli_query($con , $search_query);
-  if(mysqli_num_rows($res) == 0){
-      $q3 = "INSERT into `".$username."_passengers` (`aadhar` , `name` , `age` ,`sex`) values ('$aadhar[$x]' ,'$name[$x]' , '$age[$x]' ,'$gender[$x]' ) ;";
-      $res3  = mysqli_query($con , $q3);
-      // echo $q3;
-    }
-
-  $q4 = "INSERT into `".$username."_tic_pas` (`pnr` , `aadhar`) values($pnr , $aadhar[$x] ) ;" ;
-  // // echo $q4;
-  $res4 = mysqli_query($con, $q4);
-  
-  
- $x++;
-  }
-
-  
-  $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
-  $result2 = mysqli_query($con,$query2);
-      //  echo '<script>alert("Tickets Booked Successfully"); history.go(-1);</script>'; 
-
-
-  header("Location:crousal.php");
-
-}
-else{
 
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,6 +38,144 @@ else{
     </ul>
   </div>
 </nav>
+
+
+<?php
+// echo $_SESSION["num_ac"];echo $_SESSION["num_sl"];
+
+  //  foreach ($_SESSION["seats"] as $v){
+  //       echo $v."*";      
+  //      }
+
+if(isset($_REQUEST["submit"])){
+
+  $query = "select last_pnr_used from `sensitive_info`;";
+  $result = mysqli_query($con , $query);
+  $r = mysqli_fetch_assoc($result);
+
+
+  $pnr = $r["last_pnr_used"] + 1;
+  // echo $pnr;
+  // echo "dkkdkd";
+  // $index  = $_REQUEST["pass"];
+  $name = $_REQUEST["name"];
+  $age = $_REQUEST["age"];
+  $gender = $_REQUEST["gender"];
+  $seats  = $_SESSION["seats"];
+  $aadhar = $_REQUEST["aadhar"];
+
+  // $seatinfo = $_REQUEST["seat"];
+  $x = 0;
+  // echo $seats[$x];
+  $train_id = $_SESSION["train_id"];
+  $journey_date = $_SESSION["date"];
+  $username = $_SESSION['userid'];
+  $q2 = "INSERT into `".$username."_ticket_table` (`pnr`,`train_id`,`ticket_date`) values ($pnr , $train_id , '$journey_date' ) ;";
+  // echo $q2;
+  $res2  = mysqli_query($con , $q2);
+ ?>
+  <!-- echo "Train No: ".$train_id." PNR: ".$pnr; 
+  echo "</br>";   -->
+ <div class="container well">
+    <h2 class="text-center">
+     Your Ticket Details
+    </h2>
+     <div>Train No: <?php echo $train_id;  ?></div>
+    
+     <div >PNR: <?php echo $pnr;  ?></div>
+ 
+
+ <table class="table table-striped">
+  <tr>
+    <th class="text-center"> Passenger Name </th>
+    <th class="text-center"> Aadhar No </th>
+    <th class="text-center"> Age </th>
+    <th class="text-center"> Gender </th>
+    <th class="text-center"> Seat </th>
+    
+
+  </tr>
+
+ 
+ <?php
+
+  while($x < count($name)){
+    $st = explode("_", $seats[$x]);
+    // echo $st[0]."**".$st[1];
+    // echo $_SESSION['userid'];
+
+  ///tables insertion queries begin here 
+  $q1 = "INSERT INTO `".$train_id."_".$journey_date."_booked` (`coach_num` , `seat_num` ,`booker_username`) VALUES ($st[0] , $st[1] , '$username' ) ;";
+  // echo $q1;
+  $res1 = mysqli_query($con , $q1);
+        
+
+  $search_query = "SELECT * from `".$username."_passengers` where aadhar = $aadhar[$x]; ";
+  // echo $search_query;
+  $res = mysqli_query($con , $search_query);
+  if(mysqli_num_rows($res) == 0){
+      $q3 = "INSERT into `".$username."_passengers` (`aadhar` , `name` , `age` ,`sex`) values ('$aadhar[$x]' ,'$name[$x]' , '$age[$x]' ,'$gender[$x]' ) ;";
+      $res3  = mysqli_query($con , $q3);
+      // echo $q3;
+    }
+
+  // $q4 = "INSERT into `".$username."_tic_pas` (`pnr` , `aadhar`) values($pnr , $aadhar[$x] ) ;" ;
+  $q4 = "INSERT into `".$username."_tic_pas` (`pnr` , `aadhar`, `coach_num`, `seat_num`) values($pnr , $aadhar[$x], $st[0] , $st[1] ) ;" ;
+  // // echo $q4;
+  $res4 = mysqli_query($con, $q4);
+
+ 
+  $demo ='';
+  $s = explode("_", $_SESSION["seats"][$x]);
+             
+            if($s[0] <= $_SESSION["num_sl"]){
+              // echo $name[$x] . "---" .  $aadhar[$x] ."---". $age[$x]. "---" .$gender[$x]. "---" ;
+              $demo =  "SL".$s[0].", ".$s[1] ;
+            }
+            else{
+              // echo $name[$x] . "---" .  $aadhar[$x] ."---". $age[$x]. "---" .$gender[$x]. "---" ;
+              $demo = "AC".($s[0] - $_SESSION["num_sl"]).", ".$s[1];
+            }
+  
+            echo "</br>";  
+
+?>
+    <tr>
+        <td class="text-center"><?php echo  $name[$x];    ?> </td>
+        <td class="text-center"><?php echo  $aadhar[$x];    ?> </td>
+        <td class="text-center"><?php echo  $age[$x];    ?> </td>
+        <td class="text-center"><?php echo  $gender[$x];    ?> </td>
+        <td class="text-center"><?php echo  $demo;    ?> </td>
+    </tr>
+
+<?php
+    
+  
+ $x++;
+  }
+
+  
+  $query2 = "update `sensitive_info` set last_pnr_used = '$pnr';";
+  $result2 = mysqli_query($con,$query2);
+  echo "<br>";
+      //  echo '<script>alert("Tickets Booked Successfully"); history.go(-1);</script>'; 
+ ?>
+
+ </table>
+ <a class="btn btn-success" href="crousal.php"> Go Back </a>
+
+  </div>
+
+
+<?php
+  // header("Location:crousal.php");
+
+}
+else{
+
+?>
+
+
 
 <div class="container well">
 <form method="post" >

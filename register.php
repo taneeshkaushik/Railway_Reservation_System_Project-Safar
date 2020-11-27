@@ -54,16 +54,18 @@ $query = "INSERT INTO `booker` (`username`, `Name`,`address`, `email`, `mobile`,
               sex varchar(20),
               PRIMARY key(aadhar)
           );";
-
-         $q3 = "CREATE table ".$userid."_tic_pas
-         (
-             pnr int not null,
-             aadhar int not null,
-             primary key(pnr, aadhar),
-             foreign key(pnr) REFERENCES ".$userid."_ticket_table(pnr), 
-             foreign key (aadhar) REFERENCES ".$userid."_passengers(aadhar)
-         
-         );";
+          
+          $q3 = "CREATE table ".$userid."_tic_pas
+          (
+              pnr int not null,
+              aadhar int not null,
+              coach_num varchar(6) not null, 
+              seat_num int not null,
+              primary key(pnr, aadhar),
+              foreign key(pnr) REFERENCES ".$userid."_ticket_table(pnr), 
+              foreign key (aadhar) REFERENCES ".$userid."_passengers(aadhar)
+          
+          );";
          $res1 = mysqli_query($con,$q1);
          $res2 = mysqli_query($con,$q2);
          $res3 = mysqli_query($con,$q3);

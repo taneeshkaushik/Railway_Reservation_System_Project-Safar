@@ -39,7 +39,54 @@ include("auth.php");
 </nav>
 
 <div class="container well">
-   <h2> PNR: </h2>
+   <h2> PNR: 
+  <?php echo $_SESSION["pnr"]; ?>
+   </h2>
+   <h2> Train No: 
+  <?php echo $_SESSION["train"]; ?>
+   </h2>
+   <h2> Journey Date: 
+  <?php echo $_SESSION["date"]; ?>
+   </h2>
+
+   <?php
+
+// find details, 
+
+// $pnr_given
+
+// $booker, 
+// select aadhar, coach_num, seat_num from booker_tic_pas where pnr=$pnr_given
+
+// for each value fo 
+
+//     select * from booker_passengers where aadhar = $aadhar
+//      show, 
+
+
+    $query = "select aadhar, coach_num , seat_num from `".$_SESSION['userid']."_tic_pas` where pnr =  {$_SESSION["pnr"]} ;";
+    $result = mysqli_query($con , $query);
+    if(mysqli_num_rows($result) >  0 )
+    {
+      while($row  = mysqli_fetch_assoc($result))
+      {
+        $aad  = $row["aadhar"];
+        $query1 = "select * from `".$_SESSION['userid']."_passengers` where aadhar = $aad;";
+        $res =  mysqli_query($con , $query1);
+        if(mysqli_num_rows($res) >  0 )
+        {
+          $in  = mysqli_fetch_assoc($res);
+            echo $in["name"] ."--- ". $in["aadhar"]. " --- " . $in["age"] ."---".  $in["sex"] ."---" .$row["coach_num"]." --- ".$row["seat_num"];
+          
+        }
+
+
+      }
+
+    }
+
+   ?>
+
 
 
 </div>

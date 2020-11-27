@@ -13,6 +13,12 @@ if(count($_SESSION["seats"]) == 0)
 {
        echo '<script>alert("No seat selected"); history.go(-1);</script>'; 
 }
+elseif(count($_SESSION["seats"]) > 6)
+{
+  echo '<script>alert("You can book atmost 6 seats at a time."); history.go(-1);</script>'; 
+
+}
+
 else {
 
 header("Location:add_seats.php");

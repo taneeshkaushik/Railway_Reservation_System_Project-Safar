@@ -59,7 +59,7 @@ include("auth.php");
           <th class="text-center"> PNR Number  </th>
           <th class="text-center"> Train No </th>
           <th class="text-center"> Ticket  Date </th>
-          <!-- <th class="text-center"> Action </th> -->
+          <th class="text-center"> Action </th>
 
         </tr>
 
@@ -78,7 +78,32 @@ include("auth.php");
          <td>
            <?php echo $row["ticket_date"] ?>
          </td>
-         <!-- <td> <button >View More</button>  </td> -->
+         
+         <td>
+         <?php
+            if(isset($_REQUEST["demo"]))
+            {
+            $_SESSION["pnr"] = $_REQUEST["pnrr"];
+            
+            $_SESSION["train"] = $_REQUEST["train"];
+            $_SESSION["date"] = $_REQUEST["date"];
+            header("Location:viewticket.php");
+            }
+            else{
+       ?>
+
+         <form method="post">
+         
+         <input type= "hidden" name="train" value =" <?php echo $row["train_id"] ?>" > </input> 
+         
+         <input type= "hidden" name="date" value =" <?php echo $row["ticket_date"] ?>" > </input> 
+         
+          <input type= "hidden" name="pnrr" value =" <?php echo $row["pnr"] ?>" > </input> 
+          <button type="submit" name = "demo" >Find Details</button>  
+          </form>
+
+            <?php } ?>
+          </td>
 
   
         </tr>

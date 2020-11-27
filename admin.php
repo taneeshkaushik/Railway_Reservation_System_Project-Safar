@@ -111,13 +111,15 @@ else {
            ?>
            <input type="hidden" required="True" name ="train_no" value = <?php echo $row["train_id"]; ?> >  </input>
          </td>
-         <td><input type="date"   min="<?php  echo date('Y-m-d'); ?>" required="True" name ="journey_date">  </input> </td>
+         <td><input type="date"   min="<?php  echo date("Y-m-d",strtotime("+2 month",strtotime(date("Y-m-01",strtotime("now") ) ))); ?>" required="True" name ="journey_date">  </input> </td>
          <td><input  type="number" min ="0" value="0" required="True" name ="num_sl"> </input> </td>
          <td><input type="number" value="0" min ="0" required="True" name ="num_ac"> </input> </td>
          <td><button class="btn btn-primary" type="submit" > Release </button>   </td>
          </form>
 <!-- 
          <?php 
+
+        
         //  if(isset($_REQUEST["addroute"])){
         //    $_SESSION['train_no'] = $_REQUEST['train'];
         //    header("Location:addRoute.php");
@@ -174,17 +176,19 @@ if (isset($_REQUEST['journey_date'])){
 
   if($result1 and   $result2 and $res3 ){
       //  echo '<script>alert("Train added now available for booking."); history.go(-1);</script>'; 
-
+  
   header("Location: admin.php");
   
   }
 
 }
 
-else
-{
-  header("Location:err.php");
-}
+// else
+// {
+//   // header("Location:err.php");
+//          echo '<script>alert("Train is already added."); history.go(-1);</script>'; 
+
+// }
 
 
   // echo  $result1;
